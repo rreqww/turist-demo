@@ -106,6 +106,13 @@
   // An incoming link to a section should bypass the long opening animation.
   const section=location.hash.slice(1);
   if(['rooms-new','restaurant','conference','offers','contacts'].includes(section)){
-    addEventListener('load',()=>setTimeout(()=>document.getElementById(section)?.scrollIntoView({behavior:'instant',block:'start'}),80),{once:true});
+    const goToSection=()=>{
+      const target=document.getElementById(section);
+      if(target)window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-92,behavior:'instant'});
+    };
+    addEventListener('load',()=>{
+      document.fonts.ready.then(()=>setTimeout(goToSection,80));
+      setTimeout(goToSection,900);
+    },{once:true});
   }
 })();

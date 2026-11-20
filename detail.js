@@ -40,7 +40,16 @@
   set('detail-meta',T(entry.meta));
   set('detail-title',T(entry.title));
   set('detail-intro',T(entry.intro));
-  document.getElementById('detail-facts').innerHTML=entry.facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value)}</strong></div>`).join('');
+  const facts=[...entry.facts];
+  if(kind==='rooms'&&entry.price){
+    const rate=new Intl.NumberFormat(en?'en-US':'ru-RU').format(entry.price);
+    facts.push({label:{ru:'Цена от',en:'Rate from'},value:{ru:`${rate} ₽ / ночь`,en:`₽${rate} / night`}});
+    document.getElementById('detail-facts').classList.add('four');
+    const note=document.getElementById('detail-rate-note');
+    note.hidden=false;
+    note.textContent=say('* Ориентир по действующему сайту гостиницы. Итоговый тариф на выбранные даты уточните при бронировании.','* Indicative rate from the hotel’s current website. Confirm the final rate for your dates when booking.');
+  }
+  document.getElementById('detail-facts').innerHTML=facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value)}</strong></div>`).join('');
   document.getElementById('detail-copy').innerHTML=entry.blocks.map(b=>`<section><h2>${T(b.heading)}</h2><div><p>${T(b.text)}</p>${b.items.length?'<ul>'+b.items.map(item=>`<li>${T(item)}</li>`).join('')+'</ul>':''}</div></section>`).join('');
   const gallery=document.getElementById('detail-gallery');
   if(entry.photos||entry.count){
@@ -59,6 +68,10 @@
     phone.href='tel:+79016969272';phone.textContent='+7 (901) 696-92-72';
     email.href='mailto:restoran@tourist37.ru';email.textContent='restoran@tourist37.ru';
   }
+  const call=document.querySelector('.detail-cta-book');
+  call.removeAttribute('data-detail-book');
+  call.href=restaurant?'tel:+79016969272':'tel:+74932482727';
+  call.textContent=say('Позвонить','Call Us');
   document.querySelector('.detail-cta').id='detail-cta';
   const burger=document.getElementById('detail-burger'),menu=document.getElementById('detail-menu');
   const toggle=(open)=>{
