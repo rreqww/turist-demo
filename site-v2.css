@@ -33,6 +33,7 @@ body{background:var(--paper)}
 .new-section-dark .new-card.no-photo{background:linear-gradient(145deg,#426049,#9bab91)}
 .restaurant-logo{width:min(260px,55%);height:auto;margin:-6px 0 38px}
 .ft{padding-top:80px}.ft-mark{display:flex;justify-content:center;padding:20px var(--gutter) 76px}.ft-mark img{width:min(540px,65vw);height:auto}.social{display:inline-flex;align-items:center;gap:8px}.social-icon{display:inline-grid;place-items:center;width:27px;height:27px;border:1px solid currentColor;border-radius:6px;font-size:11px;font-weight:700}
+.social-icon img{width:19px;height:19px;object-fit:contain}.social-icon.vk{background:#0077ff;border-color:#0077ff}.social-icon.max{border:0}.social-icon.max img{width:27px;height:27px}
 .ft-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:30px}.ft-grid p{line-height:1.85}.ft-grid b:not(:first-child){margin-top:23px}
 .detail-hero{min-height:75vh;display:grid;align-items:end;background:var(--ink);color:white;position:relative;isolation:isolate}
 .detail-header{position:absolute;z-index:5;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:25px var(--gutter);color:white;background:linear-gradient(rgba(0,0,0,.4),transparent)}.detail-header a{text-decoration:none}.detail-header>a:first-child{font-weight:700;font-size:26px;letter-spacing:.04em}.detail-header nav{display:flex;gap:24px;font-size:14px}.detail-header>a:last-child{white-space:nowrap;font-size:14px}

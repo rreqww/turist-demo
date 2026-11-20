@@ -10,7 +10,7 @@ const sections = {
   restaurant: [
     {id:'restaurant',title:'Ресторан «Турист»',meta:'Ресторан',image:'assets/legacy/restaurant/04.jpg',photos:[4,5,2,3,6,7,8,9,10,11],description:'Ресторан на втором этаже комплекса: завтраки, бизнес-ланчи, ужины и события.'},
     {id:'palekh',title:'Зал «Палех»',meta:'Банкетный зал',image:'assets/legacy/palekh/02.jpg',photos:[2,3,4,5,6],description:'Камерный зал с картинами палехских мастеров для семейных и деловых встреч.'},
-    {id:'transformer',title:'Зал-трансформер',meta:'Банкетный зал',image:'assets/halls/banquet/02.jpg',count:6,description:'Многофункциональное пространство для банкетов, встреч и событий разного формата.'}
+    {id:'transformer',title:'Зал-трансформер',meta:'Банкетный зал',image:'assets/halls/banquet/01.jpg',count:6,description:'Многофункциональное пространство для банкетов, встреч и событий разного формата.'}
   ],
   conference: [
     {id:'large',title:'Большой зал',meta:'Конференц-зал',image:'assets/halls/conference-large/01.jpg',count:8,description:'Площадка для конференций, презентаций и деловых мероприятий.'},
@@ -19,7 +19,7 @@ const sections = {
   offers: [
     {id:'groups',title:'Для туристических групп',meta:'Спецпредложение',image:'assets/legacy/restaurant/04.jpg',description:'Условия размещения и питания для туристических групп.'},
     {id:'long-stay',title:'Длительное проживание',meta:'Спецпредложение',image:'assets/rooms/deluxe-sofa/03.jpg',description:'Специальные условия при длительном размещении.'},
-    {id:'wedding',title:'Свадебное предложение',meta:'Спецпредложение',image:'assets/halls/banquet/02.jpg',description:'Праздник в гостиничном комплексе «Турист».'},
+    {id:'wedding',title:'Свадебное предложение',meta:'Спецпредложение',image:'assets/halls/banquet/01.jpg',description:'Праздник в гостиничном комплексе «Турист».'},
     {id:'group-rates',title:'Цены для групп от 10 человек',meta:'Спецпредложение',image:'assets/halls/conference-large/01.jpg',description:'Индивидуальные условия для групповых бронирований.'},
     {id:'guides',title:'Питание для гидов и водителей',meta:'Спецпредложение',image:'assets/legacy/restaurant/06.jpg',description:'Предложение для сопровождающих туристические группы.'}
   ]
@@ -35,6 +35,7 @@ document.addEventListener('click', event => {
   const trigger=event.target.closest('[data-book]');
   if (!trigger) return;
   event.preventDefault(); event.stopImmediatePropagation();
+  if(document.body.classList.contains('menu-open'))document.querySelector('.burger')?.click();
   const panel=document.getElementById('booking-panel');
   if(panel){const hero=document.getElementById('top'),stage=document.getElementById('stage');const range=hero.offsetHeight-stage.clientHeight;window.scrollTo({top:hero.offsetTop+range*.9,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});panel.classList.add('booking-attention');}
   else window.location.href='index.html#top';
