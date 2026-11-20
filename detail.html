@@ -1,4 +1,57 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Гостиничный комплекс «Турист»</title><meta name="description" content="Номера, рестораны и залы гостиничного комплекса «Турист» в Иванове"><link rel="stylesheet" href="site-v2.css"></head><body>
-<header class="detail-header"><a href="index.html">ТУРИСТ</a><nav><a href="index.html#rooms-new">Номера</a><a href="index.html#restaurant">Ресторан</a><a href="index.html#conference">Конференц-залы</a><a href="index.html#offers">Спецпредложения</a></nav><a href="tel:+74932482727">+7 (4932) 48-27-27</a></header>
-<main><section class="detail-hero" id="detail-hero"><img id="detail-cover" alt=""><div class="wrap"><p class="new-eyebrow" id="detail-meta"></p><h1 id="detail-title"></h1><p id="detail-description"></p></div></section><section class="detail-body"><div class="wrap"><div class="detail-contact"><div><strong>Узнать подробности и забронировать</strong><br>Онлайн-бронирование будет подключено после согласования модуля.</div><a id="detail-phone" href="tel:+74932482727">+7 (4932) 48-27-27</a></div><div class="detail-gallery" id="detail-gallery"></div><p class="detail-note" id="detail-note"></p><a class="detail-back" href="index.html">Вернуться на главную</a></div></section></main>
-<script src="site-v2.js"></script><script src="detail.js"></script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Гостиничный комплекс «Турист»</title>
+  <meta name="description" content="Номера, рестораны и залы гостиничного комплекса «Турист» в Иванове">
+  <link rel="stylesheet" href="site-v2.css">
+</head>
+<body class="detail-page">
+  <header class="detail-header">
+    <a class="detail-brand" href="index.html"><img src="assets/brand/hotel-logo.png" alt="Турист"></a>
+    <nav aria-label="Основные разделы">
+      <a href="index.html#rooms-new">Номера</a>
+      <a href="index.html#restaurant">Ресторан</a>
+      <a href="index.html#conference">Конференц-залы</a>
+      <a href="index.html#offers">Спецпредложения</a>
+    </nav>
+    <div class="detail-header-actions"><a class="detail-book" href="index.html#top" data-detail-book>Забронировать</a><button type="button" class="detail-burger" id="detail-burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="detail-menu"><span></span><span></span></button></div>
+  </header>
+  <div class="detail-menu" id="detail-menu" inert>
+    <nav aria-label="Меню сайта">
+      <a href="index.html#top" data-detail-book>Бронирование</a>
+      <a href="index.html#rooms-new">Номера и цены</a>
+      <a href="index.html#restaurant">Ресторан</a>
+      <a href="index.html#conference">Конференц-залы</a>
+      <a href="index.html#offers">Спецпредложения</a>
+      <a href="index.html#contacts">Контакты</a>
+      <a href="legal.html">Правовая информация</a>
+    </nav>
+    <div class="detail-menu-side"><p><strong>Отдел бронирования</strong><a href="tel:+74932482727">+7 (4932) 48-27-27</a></p><p><strong>Язык</strong><a data-lang="ru" href="#">RU</a> · <a data-lang="en" href="#">EN</a></p></div>
+    <img src="assets/brand/building.png" alt="" aria-hidden="true">
+  </div>
+  <main>
+    <section class="detail-hero">
+      <img id="detail-cover" alt="">
+      <div class="wrap">
+        <a class="detail-back top-back" id="detail-back" href="index.html#rooms-new">← Назад к разделу</a>
+        <p class="new-eyebrow" id="detail-meta"></p>
+        <h1 id="detail-title"></h1>
+        <p class="detail-intro" id="detail-intro"></p>
+      </div>
+    </section>
+    <section class="detail-body">
+      <div class="wrap">
+        <div class="detail-facts" id="detail-facts"></div>
+        <div class="detail-copy" id="detail-copy"></div>
+        <div class="detail-gallery-wrap" id="detail-gallery-wrap"><p class="new-eyebrow" id="gallery-label">Галерея</p><div class="detail-gallery" id="detail-gallery"></div></div>
+        <div class="detail-cta"><div><p class="new-eyebrow" id="detail-cta-label">Планируете поездку или событие?</p><h2 id="detail-cta-title">Мы поможем с выбором</h2><p id="detail-cta-text">Свяжитесь с командой гостиницы, чтобы уточнить доступность, условия и детали.</p></div><div class="detail-cta-actions"><a class="detail-cta-phone" id="detail-phone" href="tel:+74932482727">+7 (4932) 48-27-27</a><a id="detail-email" href="mailto:booking@tourist37.ru">booking@tourist37.ru</a><a class="detail-cta-book" href="index.html#top" data-detail-book>Бронирование</a></div></div>
+        <a class="detail-back bottom-back" id="detail-back-bottom" href="index.html#rooms-new">← Назад к разделу</a>
+      </div>
+    </section>
+  </main>
+  <script src="content.js" defer></script>
+  <script src="detail.js" defer></script>
+</body>
+</html>

@@ -1,43 +1,111 @@
-const sections = {
-  rooms: [
-    {id:'standard',title:'Стандарт',meta:'Номер',image:'assets/rooms/standard/02.jpg',count:2,description:'Однокомнатный номер площадью 16–20 м². Подходит для одного или двух гостей.'},
-    {id:'standard-plus',title:'Улучшенный стандарт',meta:'Номер',image:'assets/rooms/standard-plus/01.jpg',count:8,description:'Обновлённый номер площадью около 18 м² для одного или двух гостей.'},
-    {id:'business',title:'Бизнес',meta:'Номер',image:'assets/rooms/business/01.jpg',count:1,description:'Номер площадью около 17 м² для одного или двух гостей.'},
-    {id:'superior',title:'Супериор',meta:'Номер',image:'assets/rooms/superior/02.jpg',count:7,description:'Просторный двухкомнатный номер площадью около 35 м².'},
-    {id:'deluxe-twin',title:'Делюкс · две кровати',meta:'Номер',image:'assets/rooms/deluxe-twin/01.jpg',count:8,description:'Номер площадью около 30 м² с двумя кроватями. Размещение до трёх гостей.'},
-    {id:'deluxe-sofa',title:'Делюкс · кровать и диван',meta:'Номер',image:'assets/rooms/deluxe-sofa/03.jpg',count:6,description:'Номер категории «Делюкс» с кроватью и диваном. Размещение до трёх гостей.'}
-  ],
-  restaurant: [
-    {id:'restaurant',title:'Ресторан «Турист»',meta:'Ресторан',image:'assets/legacy/restaurant/04.jpg',photos:[4,5,2,3,6,7,8,9,10,11],description:'Ресторан на втором этаже комплекса: завтраки, бизнес-ланчи, ужины и события.'},
-    {id:'palekh',title:'Зал «Палех»',meta:'Банкетный зал',image:'assets/legacy/palekh/02.jpg',photos:[2,3,4,5,6],description:'Камерный зал с картинами палехских мастеров для семейных и деловых встреч.'},
-    {id:'transformer',title:'Зал-трансформер',meta:'Банкетный зал',image:'assets/halls/banquet/01.jpg',count:6,description:'Многофункциональное пространство для банкетов, встреч и событий разного формата.'}
-  ],
-  conference: [
-    {id:'large',title:'Большой зал',meta:'Конференц-зал',image:'assets/halls/conference-large/01.jpg',count:8,description:'Площадка для конференций, презентаций и деловых мероприятий.'},
-    {id:'small',title:'Малый зал',meta:'Конференц-зал',image:'assets/halls/conference-small/01.jpg',count:5,description:'Зал для встреч, семинаров и камерных деловых мероприятий.'}
-  ],
-  offers: [
-    {id:'groups',title:'Для туристических групп',meta:'Спецпредложение',image:'assets/legacy/restaurant/04.jpg',description:'Условия размещения и питания для туристических групп.'},
-    {id:'long-stay',title:'Длительное проживание',meta:'Спецпредложение',image:'assets/rooms/deluxe-sofa/03.jpg',description:'Специальные условия при длительном размещении.'},
-    {id:'wedding',title:'Свадебное предложение',meta:'Спецпредложение',image:'assets/halls/banquet/01.jpg',description:'Праздник в гостиничном комплексе «Турист».'},
-    {id:'group-rates',title:'Цены для групп от 10 человек',meta:'Спецпредложение',image:'assets/halls/conference-large/01.jpg',description:'Индивидуальные условия для групповых бронирований.'},
-    {id:'guides',title:'Питание для гидов и водителей',meta:'Спецпредложение',image:'assets/legacy/restaurant/06.jpg',description:'Предложение для сопровождающих туристические группы.'}
-  ]
-};
-window.TOURIST_CONTENT = sections;
-const roots = {rooms:'room-cards',restaurant:'restaurant-cards',conference:'conference-cards',offers:'offer-cards'};
-for (const [kind,list] of Object.entries(sections)) {
-  const root = document.getElementById(roots[kind]);
-  if (!root) continue;
-  root.innerHTML = list.map(item => `<a class="new-card ${item.image?'':'no-photo'}" href="detail.html?kind=${kind}&id=${item.id}">${item.image?`<img loading="lazy" src="${item.image}" alt="${item.title}">`:''}<span class="card-label"><span class="card-meta">${item.meta}</span>${item.title}</span></a>`).join('');
-}
-document.addEventListener('click', event => {
-  const trigger=event.target.closest('[data-book]');
-  if (!trigger) return;
-  event.preventDefault(); event.stopImmediatePropagation();
-  if(document.body.classList.contains('menu-open'))document.querySelector('.burger')?.click();
-  const panel=document.getElementById('booking-panel');
-  if(panel){const hero=document.getElementById('top'),stage=document.getElementById('stage');const range=hero.offsetHeight-stage.clientHeight;window.scrollTo({top:hero.offsetTop+range*.9,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});panel.classList.add('booking-attention');}
-  else window.location.href='index.html#top';
-},true);
-document.querySelectorAll('a[href="#rooms"]').forEach(link=>link.href='#rooms-new');
+(() => {
+  const lang=window.TOURIST_LANG||'ru';
+  const T=window.TOURIST_T||((x)=>x);
+  const sections=window.TOURIST_CONTENT||{};
+  const roots={rooms:'room-cards',restaurant:'restaurant-cards',conference:'conference-cards',offers:'offer-cards'};
+  const anchors={rooms:'rooms-new',restaurant:'restaurant',conference:'conference',offers:'offers'};
+  const localized=(ru,en)=>lang==='en'?en:ru;
+  const set=(selector,ru,en)=>{const node=document.querySelector(selector);if(node)node.textContent=localized(ru,en)};
+  const url=(path,section)=>window.TOURIST_URL(path,section);
+
+  for(const [kind,list] of Object.entries(sections)){
+    const root=document.getElementById(roots[kind]);
+    if(!root)continue;
+    root.innerHTML=list.map(item=>{
+      const title=T(item.title),meta=T(item.meta);
+      const href=url(`detail.html?kind=${kind}&id=${item.id}`,anchors[kind]);
+      return `<a class="new-card" href="${href}"><img loading="lazy" src="${item.image}" alt="${title}"><span class="card-label"><span class="card-meta">${meta}</span>${title}</span></a>`;
+    }).join('');
+  }
+
+  document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.addEventListener('click',()=>{
+    const rail=document.getElementById('room-cards');
+    const card=rail?.querySelector('.new-card');
+    if(card)rail.scrollBy({left:parseInt(button.dataset.dir,10)*(card.getBoundingClientRect().width+18),behavior:'smooth'});
+  }));
+  document.querySelectorAll('a[href="#rooms"]').forEach(link=>link.href='#rooms-new');
+  document.querySelectorAll('[data-lang]').forEach(link=>{
+    link.classList.toggle('active',link.dataset.lang===lang);
+    link.setAttribute('aria-current',link.dataset.lang===lang?'page':'false');
+    if(link.dataset.lang==='en')link.href='?lang=en'+location.hash;
+    else link.href='?lang=ru'+location.hash;
+  });
+  document.querySelectorAll('a[href="legal.html"]').forEach(a=>a.href=url('legal.html'));
+
+  set('.skip','К содержанию','Skip to content');
+  set('.nav a:nth-child(1)','Номера','Rooms');
+  set('.nav a:nth-child(2)','Ресторан и банкеты','Restaurant & Events');
+  set('.nav a:nth-child(3)','Конференц-залы','Conference Halls');
+  set('.nav a:nth-child(4)','Спецпредложения','Special Offers');
+  set('.hdr-r [data-book]','Забронировать','Book Now');
+  const menuLabels=[
+    ['Бронирование','Booking'],['Номера и цены','Rooms & Rates'],
+    ['Ресторан','Restaurant'],['Конференц-залы','Conference Halls'],
+    ['Спецпредложения','Special Offers'],['Контакты','Contacts'],
+    ['Правовая информация','Legal Information']
+  ];
+  document.querySelectorAll('.menu li a').forEach((a,i)=>{if(menuLabels[i])a.textContent=localized(...menuLabels[i])});
+  set('.menu-side div:nth-child(1) b','Адрес','Address');
+  const menuAddress=document.querySelector('.menu-side div:nth-child(1)');
+  if(menuAddress)menuAddress.lastChild.textContent=localized('Иваново, Набережная улица, 9','Ivanovo, 9 Naberezhnaya Street');
+  set('.menu-side div:nth-child(2) b','Отдел бронирования','Reservations');
+  set('.menu-side div:nth-child(3) b','Почта','Email');
+  set('.menu-side div:nth-child(4) b','Язык','Language');
+  set('.h-meta .addr','Иваново, Набережная улица, 9','Ivanovo, Naberezhnaya Street, 9');
+  set('.h-meta .cue','Листайте','Scroll');
+  const cue=document.querySelector('.h-meta .cue');
+  if(cue)cue.innerHTML=localized('Листайте','Scroll')+' <i></i>';
+  set('#hsub','гостиничный комплекс','hotel complex');
+  set('#htitle','В самом сердце города','At the Heart of the City');
+  set('.h-lead','Рядом драматический и кукольный театры, а также Ивановский историко-краеведческий музей имени Д. Г. Бурылина.','Close to the drama and puppet theatres and the Ivanovo Museum of Local History.');
+  set('#booking-panel span','Онлайн-бронирование подключается','Online booking is coming soon');
+  set('#booking-panel a','Пока можно забронировать по телефону: +7 (4932) 48-27-27','For now, book by phone: +7 (4932) 48-27-27');
+
+  set('#rooms-new .new-eyebrow','Гостиничный комплекс «Турист»','Tourist Hotel Complex');
+  set('#rooms-new h2','Номера','Rooms');
+  set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
+  set('.carousel-hint','Листайте номера','Explore the rooms');
+  set('#restaurant .new-eyebrow','Вкус и атмосфера','Taste & Atmosphere');
+  set('#restaurant .restaurant-intro p','Завтраки, встречи и события в самом центре Иванова. Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo. Find a space for your occasion.');
+  set('#conference .new-eyebrow','Деловые события','Business Events');
+  set('#conference h2','Конференц-залы','Conference Halls');
+  set('#conference .new-heading p','Два пространства для встреч, презентаций и мероприятий: большой зал до 120 гостей и малый зал до 50 гостей.','Two spaces for meetings and events: the large hall seats up to 120 guests and the small hall up to 50.');
+  set('#offers .new-eyebrow','Для особых планов','For Every Plan');
+  set('#offers h2','Спецпредложения','Special Offers');
+  set('#offers .new-heading p','Условия для групп, длительного проживания и свадебных событий.','Offers for groups, extended stays and weddings.');
+  set('.ft-grid>div:nth-child(1)>b','Адрес','Address');
+  set('.ft-grid>div:nth-child(1)>p','Иваново, Набережная улица, 9','Ivanovo, Naberezhnaya Street, 9');
+  set('.ft-grid>div:nth-child(2)>b','Бронирование и конференции','Reservations & Conferences');
+  set('.ft-grid>div:nth-child(3)>b:first-child','Ресторан','Restaurant');
+  set('.ft-grid>div:nth-child(3)>b:nth-of-type(2)','Сотрудничество и реклама','Partnerships & Advertising');
+  set('.ft-grid>div:nth-child(4)>b:first-child','Мы в сети','Follow Us');
+  set('.ft-grid>div:nth-child(4)>b:nth-of-type(2)','Разделы','Explore');
+  set('.ft-grid .social[href*="vk.ru"]','ВКонтакте','VK');
+  // Restore icon after changing the social text.
+  const vk=document.querySelector('.ft-grid .social[href*="vk.ru"]');
+  if(vk)vk.innerHTML='<span class="social-icon vk"><img src="assets/social/vk.svg" alt=""></span> '+localized('ВКонтакте','VK');
+  document.querySelectorAll('.ft-nav a').forEach((a,i)=>a.textContent=localized(...[['Номера','Rooms'],['Спецпредложения','Special Offers'],['Правовая информация','Legal Information']][i]));
+  set('.ft-bot span:first-child','Гостиничный комплекс «Турист» · Иваново','Tourist Hotel Complex · Ivanovo');
+  set('.ft-bot span:last-child','Набережная улица, 9','9 Naberezhnaya Street');
+  document.title=localized('Гостиничный комплекс «Турист» · Иваново','Tourist Hotel Complex · Ivanovo');
+
+  document.addEventListener('click',event=>{
+    const trigger=event.target.closest('[data-book]');
+    if(!trigger)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if(document.body.classList.contains('menu-open'))document.querySelector('.burger')?.click();
+    const panel=document.getElementById('booking-panel');
+    if(!panel)return;
+    const hero=document.getElementById('top'),stage=document.getElementById('stage');
+    const range=hero.offsetHeight-stage.clientHeight;
+    window.scrollTo({top:hero.offsetTop+range*.9,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    panel.classList.add('booking-attention');
+  },true);
+
+  // An incoming link to a section should bypass the long opening animation.
+  const section=location.hash.slice(1);
+  if(['rooms-new','restaurant','conference','offers','contacts'].includes(section)){
+    addEventListener('load',()=>setTimeout(()=>document.getElementById(section)?.scrollIntoView({behavior:'instant',block:'start'}),80),{once:true});
+  }
+})();
