@@ -281,24 +281,18 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   .stripe{transform:none}
 }
 </style>
+<link rel="stylesheet" href="site-v2.css">
 
 <a class="skip" href="#main">К содержанию</a>
 
 <header class="hdr" id="hdr">
   <a class="brand" href="#top" aria-label="Гостиничный комплекс «Турист», на главную">
-    <svg viewBox="0 0 132 46" aria-hidden="true">
-      <g fill="currentColor">
-        <path id="bs" d="M0-5l1.47 3.1 3.4.36-2.54 2.3.72 3.35L0 2.4l-3.05 1.7.72-3.35-2.54-2.3 3.4-.36z" transform="translate(44 6)"/>
-        <use href="#bs" x="15"/><use href="#bs" x="30"/><use href="#bs" x="45"/>
-      </g>
-      <text x="66" y="42" text-anchor="middle" font-family="Jost, Century Gothic, sans-serif" font-weight="800" font-size="30" textLength="130" lengthAdjust="spacingAndGlyphs" fill="currentColor">ТУРИСТ</text>
-    </svg>
+    <img src="assets/brand/hotel-logo.png" alt="Турист">
   </a>
   <nav class="nav" aria-label="Основные разделы">
     <a href="#rooms">Номера</a>
-    <a href="#hall">Рестораны</a>
-    <a href="#hall">Банкеты</a>
-    <a href="#" data-soon="Конференц-залы">Конференц-залы</a>
+    <a href="#restaurant">Ресторан</a>
+    <a href="#conference">Конференц-залы</a>
     <a href="#contacts">Контакты</a>
   </nav>
   <div class="hdr-r">
@@ -313,14 +307,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <ol>
       <li style="--i:0"><a href="#top" data-book>Бронирование</a></li>
       <li style="--i:1"><a href="#rooms">Номера и цены</a></li>
-      <li style="--i:2"><a href="#" data-soon="Акции">Акции</a></li>
-      <li style="--i:3"><a href="#" data-soon="Услуги">Услуги</a></li>
-      <li style="--i:4"><a href="#" data-soon="Конференц-залы">Конференц-залы</a></li>
-      <li style="--i:5"><a href="#hall">Рестораны</a></li>
-      <li style="--i:6"><a href="#" data-soon="Фотогалерея">Фотогалерея</a></li>
-      <li style="--i:7"><a href="#" data-soon="Новости">Новости</a></li>
-      <li style="--i:8"><a href="#" data-soon="Отзывы">Отзывы</a></li>
-      <li style="--i:9"><a href="#contacts">Контакты</a></li>
+      <li style="--i:2"><a href="#restaurant">Ресторан</a></li>
+      <li style="--i:3"><a href="#conference">Конференц-залы</a></li>
+      <li style="--i:4"><a href="#offers">Спецпредложения</a></li>
+      <li style="--i:5"><a href="#contacts">Контакты</a></li>
+      <li style="--i:6"><a href="legal.html">Правовая информация</a></li>
     </ol>
     <div class="menu-side">
       <div><b>Адрес</b>Иваново, Набережная улица, 9</div>
@@ -335,24 +326,24 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <section class="hero" id="top" aria-label="Гостиничный комплекс «Турист»">
     <h1 class="sr">Гостиничный комплекс «Турист», Иваново</h1>
     <div class="stage" id="stage">
-      <div class="h-photo"><div class="h-img" id="himg"></div></div>
+      <div class="h-photo"><div class="h-img" id="himg"></div><video class="hero-video hero-video-wide" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true"><source src="assets/hero-wide.mp4" type="video/mp4"></video><video class="hero-video hero-video-tall" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/hero-tall.mp4" type="video/mp4"></video></div>
       <div class="h-shade"></div>
       <svg class="h-svg" id="hsvg" aria-hidden="true">
         <defs>
-          <pattern id="p0" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#1C2B23"/><circle cx="5" cy="5" r="2.1" fill="#F0ECE1"/></pattern>
-          <pattern id="p1" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10" patternTransform="rotate(38)"><rect width="10" height="10" fill="#1C2B23"/><rect width="3.2" height="10" fill="#F0ECE1"/></pattern>
-          <pattern id="p2" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#1C2B23"/><path d="M5 1.2 8.8 5 5 8.8 1.2 5Z" fill="#F0ECE1"/></pattern>
-          <pattern id="p3" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#1C2B23"/><rect width="2.6" height="10" fill="#F0ECE1"/></pattern>
+           <pattern id="p0" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><circle cx="5" cy="5" r="2.1" fill="#e3ece7"/></pattern>
+           <pattern id="p1" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10" patternTransform="rotate(38)"><rect width="10" height="10" fill="#103b2f"/><rect width="3.2" height="10" fill="#e3ece7"/></pattern>
+           <pattern id="p2" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><path d="M5 1.2 8.8 5 5 8.8 1.2 5Z" fill="#e3ece7"/></pattern>
+           <pattern id="p3" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><rect width="2.6" height="10" fill="#e3ece7"/></pattern>
           <mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
             <rect id="mrect" x="0" y="0" width="100" height="100" fill="#fff"/>
             <g id="zgM"></g>
           </mask>
         </defs>
-        <rect id="cover" x="0" y="0" width="100" height="100" fill="#F0ECE1" mask="url(#hm)"/>
+         <rect id="cover" x="0" y="0" width="100" height="100" fill="#e3ece7" mask="url(#hm)"/>
         <g id="zgP"></g>
         <g id="deco">
           <g id="stars"></g>
-          <text id="hsub" class="hsub" text-anchor="middle" font-family="Jost, Century Gothic, sans-serif" font-weight="400">гостиничный комплекс</text>
+           <text id="hsub" class="hsub" text-anchor="middle" font-family="AvantGardeCTT, Century Gothic, sans-serif" font-weight="400">гостиничный комплекс</text>
         </g>
       </svg>
       <div class="h-meta"><div class="h-meta-in" id="hmeta">
@@ -372,6 +363,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
             <div class="bf bsum"><span class="bl" id="nights">1 ночь</span><span class="bv">от<span class="odo" id="total" aria-hidden="true"></span>₽</span><span class="sr" id="totalsr" aria-live="polite"></span></div>
             <div class="bgo"><button class="btn btn-gold" type="submit" id="find">Найти номер <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
           </form>
+          <div class="booking-pending" id="booking-panel"><span>Онлайн-бронирование подключается</span><a href="tel:+74932482727">Пока можно забронировать по телефону: +7 (4932) 48-27-27</a></div>
         </div>
       </div>
     </div>
@@ -428,19 +420,22 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       </div>
     </div>
   </section>
+  <section class="new-section" id="rooms-new"><div class="wrap"><p class="new-eyebrow">Гостиничный комплекс «Турист»</p><div class="new-heading"><h2>Номера</h2><p>Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.</p></div><div class="new-grid rooms-cards" id="room-cards"></div></div></section>
+  <section class="new-section new-section-dark" id="restaurant"><div class="wrap"><p class="new-eyebrow">Вкус и атмосфера</p><div class="new-heading"><h2>Ресторан</h2><p>Ресторан «Турист» и площадки для ваших событий.</p></div><img class="restaurant-logo" src="assets/brand/restaurant-logo.png" alt="Ресторан Турист"><div class="new-grid" id="restaurant-cards"></div></div></section>
+  <section class="new-section" id="conference"><div class="wrap"><p class="new-eyebrow">Деловые события</p><div class="new-heading"><h2>Конференц-залы</h2><p>Большой и малый залы для встреч, презентаций и мероприятий.</p></div><div class="new-grid" id="conference-cards"></div></div></section>
+  <section class="new-section offers-section" id="offers"><div class="wrap"><p class="new-eyebrow">Для особых планов</p><div class="new-heading"><h2>Спецпредложения</h2><p>Условия для групп, длительного проживания и свадебных событий.</p></div><div class="new-grid" id="offer-cards"></div></div></section>
 </main>
 
 <footer class="ft" id="contacts">
-  <div class="ft-ph" aria-hidden="true"><div class="ft-pi" data-par="0.12"></div></div>
-  <p class="ft-word" aria-hidden="true">ТУРИСТ</p>
+  <div class="ft-mark" aria-hidden="true"><img src="assets/brand/building.png" alt=""></div>
   <div class="wrap">
     <div class="ft-grid">
       <div><b>Адрес</b><p>Иваново,<br>Набережная улица, 9</p></div>
-      <div><b>Отдел бронирования</b><p><a href="tel:+74932482727">+7 (4932) 48-27-27</a></p></div>
-      <div><b>Почта</b><p><a href="mailto:booking@tourist37.ru">booking@tourist37.ru</a></p></div>
-      <div><b>Разделы</b><ul class="ft-nav"><li><a href="#rooms">Номера и цены</a></li><li><a href="#hall">Рестораны</a></li><li><a href="#" data-soon="Отзывы">Отзывы</a></li><li><a href="#" data-soon="Фотогалерея">Фотогалерея</a></li></ul></div>
+      <div><b>Бронирование и конференции</b><p><a href="tel:+74932482727">+7 (4932) 48-27-27</a><br><a href="tel:+79012832915">+7 (901) 283-29-15</a><br><a href="mailto:booking@tourist37.ru">booking@tourist37.ru</a></p></div>
+      <div><b>Ресторан</b><p><a href="tel:+79016969272">+7 (901) 696-92-72</a><br><a href="mailto:restoran@tourist37.ru">restoran@tourist37.ru</a></p><b>Сотрудничество и реклама</b><p><a href="mailto:marketing@tourist37.ru">marketing@tourist37.ru</a></p></div>
+      <div><b>Мы в сети</b><p><a class="social" href="https://vk.ru/ivanovotourist" target="_blank" rel="noopener"><span class="social-icon">VK</span> ВКонтакте</a></p><p><span class="social"><span class="social-icon">M</span> MAX: +7 (901) 696-92-72</span></p><b>Разделы</b><ul class="ft-nav"><li><a href="#rooms-new">Номера</a></li><li><a href="#offers">Спецпредложения</a></li><li><a href="legal.html">Правовая информация</a></li></ul></div>
     </div>
-    <div class="ft-bot"><span>Гостиничный комплекс «Турист» · Иваново</span><span>Демо-версия главной страницы, 2026</span></div>
+    <div class="ft-bot"><span>Гостиничный комплекс «Турист» · Иваново</span><span>Набережная улица, 9</span></div>
   </div>
 </footer>
 
@@ -499,7 +494,7 @@ const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return m10 
 const stage = $('#stage'), hero = $('#top'), svg = $('#hsvg'), hdr = $('#hdr');
 const zgM = $('#zgM'), zgP = $('#zgP'), cover = $('#cover'), mrect = $('#mrect'), mask = $('#hm');
 const starsG = $('#stars'), hsub = $('#hsub'), deco = $('#deco'), hmeta = $('#hmeta'), hfinal = $('#hfinal'), himg = $('#himg');
-const WORD = 'ТУРИСТ', PATS = ['url(#p0)', 'url(#p1)', 'url(#p2)', 'url(#p3)', '#1C2B23', 'url(#p0)'];
+const WORD = 'ТУРИСТ', PATS = ['url(#p0)', 'url(#p1)', 'url(#p2)', 'url(#p3)', '#103b2f', 'url(#p0)'];
 let L = null;          // раскладка
 let lastW = 0, lastH = 0;
 
@@ -528,7 +523,7 @@ function layoutHero() {
 
   // ширина слова и размер шрифта через canvas
   const cx = document.createElement('canvas').getContext('2d');
-  cx.font = '800 100px Jost, "Century Gothic", sans-serif';
+   cx.font = '700 100px AvantGardeCTT, "Century Gothic", sans-serif';
   const adv = [...WORD].map(ch => cx.measureText(ch).width);
   const ls = 3; // межбуквенный зазор на кегль 100
   const w100 = adv.reduce((a, b) => a + b, 0) + ls * (WORD.length - 1);
@@ -548,7 +543,7 @@ function layoutHero() {
     const mk = (cls, fill) => {
       const t = document.createElementNS(NS, 'text');
       t.setAttribute('x', xs[i].toFixed(2)); t.setAttribute('y', base.toFixed(2));
-      t.setAttribute('font-family', 'Jost, Century Gothic, sans-serif'); t.setAttribute('font-weight', '800');
+       t.setAttribute('font-family', 'AvantGardeCTT, Century Gothic, sans-serif'); t.setAttribute('font-weight', '700');
       t.setAttribute('font-size', F.toFixed(2)); t.setAttribute('class', cls); t.style.setProperty('--i', i);
       if (fill) t.setAttribute('fill', fill);
       t.textContent = ch; return t;
@@ -576,7 +571,7 @@ function layoutHero() {
   const cw = Math.ceil(totalW * r) + pad * 2, chh = Math.ceil(F * r) + pad * 2;
   const cv = document.createElement('canvas'); cv.width = cw; cv.height = chh;
   const g = cv.getContext('2d');
-  g.font = `800 ${F * r}px Jost, "Century Gothic", sans-serif`; g.textBaseline = 'alphabetic'; g.fillStyle = '#000';
+   g.font = `700 ${F * r}px AvantGardeCTT, "Century Gothic", sans-serif`; g.textBaseline = 'alphabetic'; g.fillStyle = '#000';
   const cb = pad + cap * r + 2;
   [...WORD].forEach((ch, i) => g.fillText(ch, pad + (xs[i] - x0) * r, cb));
   const a = g.getImageData(0, 0, cw, chh).data, N = cw * chh, dist = new Float32Array(N);
@@ -702,7 +697,7 @@ function applyMotionMode() {
 RM.addEventListener('change', applyMotionMode);
 
 const fontsReady = Promise.race([
-  Promise.all([document.fonts.load('800 100px Jost'), document.fonts.load('400 40px "Yeseva One"')]),
+  Promise.allSettled([document.fonts.load('700 100px AvantGardeCTT'), document.fonts.load('400 40px AvantGardeCTT')]),
   new Promise(r => setTimeout(r, 2500))
 ]);
 fontsReady.then(() => {
@@ -847,3 +842,4 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 onScroll();
 })();
 </script>
+<script src="site-v2.js" defer></script>
