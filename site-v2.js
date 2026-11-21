@@ -27,10 +27,13 @@
     const rail=document.getElementById(kind==='rooms'?'room-cards':'offer-cards');
     const previous=document.querySelector(`[data-slide="${kind}"][data-dir="-1"]`);
     const next=document.querySelector(`[data-slide="${kind}"][data-dir="1"]`);
+    const progress=rail?.closest('.carousel-shell')?.querySelector('.carousel-progress-fill');
     if(!rail||!previous||!next)continue;
     const update=()=>{
       previous.disabled=rail.scrollLeft<=2;
-      next.disabled=rail.scrollLeft>=rail.scrollWidth-rail.clientWidth-2;
+      const maxScroll=Math.max(0,rail.scrollWidth-rail.clientWidth);
+      next.disabled=rail.scrollLeft>=maxScroll-2;
+      if(progress)progress.style.width=`${18+82*(maxScroll?Math.min(1,Math.max(0,rail.scrollLeft/maxScroll)):1)}%`;
     };
     rail.addEventListener('scroll',update,{passive:true});
     addEventListener('resize',update);
@@ -84,6 +87,8 @@
   set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
   set('.carousel-hint','← Свайпайте номера →','← Swipe through rooms →');
   set('.offers-hint','← Свайпайте предложения →','← Swipe through offers →');
+  document.querySelectorAll('.carousel-arrow[data-dir="-1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Назад','Previous'));
+  document.querySelectorAll('.carousel-arrow[data-dir="1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Далее','Next'));
   document.querySelectorAll('[data-slide="offers"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующее предложение':'Предыдущее предложение',button.dataset.dir==='1'?'Next offer':'Previous offer')));
   document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
   set('#restaurant .mobile-scroll-hint','← Листайте карточки →','← Swipe through the cards →');
