@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(['#rooms-new','#restaurant','#conference','#offers','#contacts'].includes(location.hash))document.documentElement.classList.add('section-return')</script>
 <title>Гостиница «Турист» · Иваново</title>
 <meta name="description" content="Гостиничный комплекс «Турист» в самом сердце Иваново: номера, ресторан, банкетные и конференц-залы. Набережная улица, 9.">
 <meta name="theme-color" content="#1C2B23">
@@ -17,6 +18,7 @@
 *{box-sizing:border-box}
 html{overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:auto}
 body{margin:0;overflow-x:clip;background:var(--cream);color:var(--ink);font:400 17px/1.6 var(--f-body)}
+body{transition:opacity .2s ease}html.section-return body{opacity:0}
 img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit}
@@ -412,7 +414,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 </main>
 
 <footer class="ft" id="contacts">
-  <div class="ft-photo" aria-hidden="true"><img src="assets/hotel-exterior.webp" alt=""><span>ТУРИСТ</span></div>
+  <div class="ft-photo" aria-hidden="true"><img src="assets/hotel-exterior.webp" alt=""><img class="ft-photo-logo" src="assets/brand/hotel-logo.png" alt=""></div>
   <div class="wrap">
     <div class="ft-grid">
       <div><b>Адрес</b><p>Иваново,<br>Набережная улица, 9</p></div>

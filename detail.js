@@ -58,7 +58,7 @@
     gallery.innerHTML=photos.map((n,i)=>`<img loading="lazy" src="${prefix}${String(n).padStart(2,'0')}.jpg" alt="${T(entry.title)}, ${say('фотография','photo')} ${i+1}">`).join('');
   }else document.getElementById('detail-gallery-wrap').hidden=true;
   set('gallery-label',say('Галерея','Gallery'));
-  set('gallery-hint',say('Листайте фотографии','Explore the gallery'));
+  set('gallery-hint',say('Листайте фото →','Swipe photos →'));
   document.querySelectorAll('[data-gallery-dir]').forEach(button=>button.setAttribute('aria-label',say(button.dataset.galleryDir==='1'?'Следующая фотография':'Предыдущая фотография',button.dataset.galleryDir==='1'?'Next photo':'Previous photo')));
   document.querySelectorAll('[data-gallery-dir]').forEach(button=>button.addEventListener('click',()=>{
     const photo=gallery.querySelector('img');

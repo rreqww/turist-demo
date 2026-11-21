@@ -113,16 +113,30 @@
     panel.classList.add('booking-attention');
   },true);
 
-  // An incoming link to a section should bypass the long opening animation.
+  const heroPanel=document.getElementById('hfinal');
+  const syncHeroText=()=>{
+    const hero=document.getElementById('top'),stage=document.getElementById('stage');
+    const range=hero.offsetHeight-stage.clientHeight;
+    const progress=range>0?Math.max(0,Math.min(1,-hero.getBoundingClientRect().top/range)):0;
+    heroPanel.style.visibility=progress<.59?'hidden':'visible';
+  };
+  addEventListener('scroll',syncHeroText,{passive:true});
+  syncHeroText();
+
+  // Hide the opening screen until a direct return lands at its section.
   const section=location.hash.slice(1);
   if(['rooms-new','restaurant','conference','offers','contacts'].includes(section)){
     const goToSection=()=>{
       const target=document.getElementById(section);
       if(target)window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-92,behavior:'instant'});
     };
-    addEventListener('load',()=>{
-      document.fonts.ready.then(()=>setTimeout(goToSection,80));
-      setTimeout(goToSection,900);
-    },{once:true});
+    Promise.race([document.fonts.ready,new Promise(resolve=>setTimeout(resolve,500))]).then(()=>{
+      goToSection();
+      requestAnimationFrame(()=>{
+        goToSection();
+        document.documentElement.classList.remove('section-return');
+      });
+      setTimeout(goToSection,600);
+    });
   }
 })();
