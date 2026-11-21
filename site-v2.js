@@ -23,6 +23,19 @@
     const card=rail?.querySelector('.new-card');
     if(card)rail.scrollBy({left:parseInt(button.dataset.dir,10)*(card.getBoundingClientRect().width+18),behavior:'smooth'});
   }));
+  for(const kind of ['rooms','offers']){
+    const rail=document.getElementById(kind==='rooms'?'room-cards':'offer-cards');
+    const previous=document.querySelector(`[data-slide="${kind}"][data-dir="-1"]`);
+    const next=document.querySelector(`[data-slide="${kind}"][data-dir="1"]`);
+    if(!rail||!previous||!next)continue;
+    const update=()=>{
+      previous.disabled=rail.scrollLeft<=2;
+      next.disabled=rail.scrollLeft>=rail.scrollWidth-rail.clientWidth-2;
+    };
+    rail.addEventListener('scroll',update,{passive:true});
+    addEventListener('resize',update);
+    requestAnimationFrame(update);
+  }
   document.querySelectorAll('a[href="#rooms"]').forEach(link=>link.href='#rooms-new');
   document.querySelectorAll('[data-lang]').forEach(link=>{
     link.classList.toggle('active',link.dataset.lang===lang);
@@ -69,8 +82,8 @@
   set('#rooms-new .new-eyebrow','Гостиничный комплекс «Турист»','Tourist Hotel Complex');
   set('#rooms-new h2','Номера','Rooms');
   set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
-  set('.carousel-hint','Листайте номера','Explore the rooms');
-  set('.offers-hint','Листайте предложения','Explore the offers');
+  set('.carousel-hint','← Свайпайте номера →','← Swipe through rooms →');
+  set('.offers-hint','← Свайпайте предложения →','← Swipe through offers →');
   document.querySelectorAll('[data-slide="offers"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующее предложение':'Предыдущее предложение',button.dataset.dir==='1'?'Next offer':'Previous offer')));
   document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
   set('#restaurant .mobile-scroll-hint','← Листайте карточки →','← Swipe through the cards →');
