@@ -45,9 +45,6 @@
     const rate=new Intl.NumberFormat(en?'en-US':'ru-RU').format(entry.price);
     facts.push({label:{ru:'Цена от',en:'Rate from'},value:{ru:`${rate} ₽ / ночь`,en:`₽${rate} / night`}});
     document.getElementById('detail-facts').classList.add('four');
-    const note=document.getElementById('detail-rate-note');
-    note.hidden=false;
-    note.textContent=say('* Ориентир по действующему сайту гостиницы. Итоговый тариф на выбранные даты уточните при бронировании.','* Indicative rate from the hotel’s current website. Confirm the final rate for your dates when booking.');
   }
   document.getElementById('detail-facts').innerHTML=facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value)}</strong></div>`).join('');
   document.getElementById('detail-copy').innerHTML=entry.blocks.map(b=>`<section><h2>${T(b.heading)}</h2><div><p>${T(b.text)}</p>${b.items.length?'<ul>'+b.items.map(item=>`<li>${T(item)}</li>`).join('')+'</ul>':''}</div></section>`).join('');
@@ -56,9 +53,17 @@
     const prefix=entry.image.slice(0,entry.image.lastIndexOf('/')+1);
     const selected=Number(entry.image.match(/(\d+)\.jpg$/)?.[1]);
     const photos=entry.photos||[selected,...Array.from({length:entry.count},(_,i)=>i+1).filter(n=>n!==selected)];
+    gallery.classList.add(`count-${photos.length}`);
+    document.getElementById('detail-gallery-wrap').classList.add(`gallery-${photos.length}`);
     gallery.innerHTML=photos.map((n,i)=>`<img loading="lazy" src="${prefix}${String(n).padStart(2,'0')}.jpg" alt="${T(entry.title)}, ${say('фотография','photo')} ${i+1}">`).join('');
   }else document.getElementById('detail-gallery-wrap').hidden=true;
   set('gallery-label',say('Галерея','Gallery'));
+  set('gallery-hint',say('Листайте фотографии','Explore the gallery'));
+  document.querySelectorAll('[data-gallery-dir]').forEach(button=>button.setAttribute('aria-label',say(button.dataset.galleryDir==='1'?'Следующая фотография':'Предыдущая фотография',button.dataset.galleryDir==='1'?'Next photo':'Previous photo')));
+  document.querySelectorAll('[data-gallery-dir]').forEach(button=>button.addEventListener('click',()=>{
+    const photo=gallery.querySelector('img');
+    if(photo)gallery.scrollBy({left:Number(button.dataset.galleryDir)*(photo.getBoundingClientRect().width+16),behavior:'smooth'});
+  }));
   set('detail-cta-label',say('Планируете поездку или событие?','Planning a stay or event?'));
   set('detail-cta-title',say('Поможем всё организовать','Let us help you plan'));
   set('detail-cta-text',say('Уточните свободные даты, условия и детали у команды гостиницы. Онлайн-бронирование появится после подключения модуля.','Ask the hotel team about availability, terms and details. Online booking will be available after the booking module is connected.'));
@@ -72,7 +77,25 @@
   call.removeAttribute('data-detail-book');
   call.href=restaurant?'tel:+79016969272':'tel:+74932482727';
   call.textContent=say('Позвонить','Call Us');
-  document.querySelector('.detail-cta').id='detail-cta';
+  const cta=document.querySelector('.detail-cta');
+  cta.id='detail-cta';
+  cta.style.setProperty('--cta-photo',`url("${entry.image}")`);
+  if(kind==='rooms'){
+    const online=document.getElementById('detail-online-book');
+    online.hidden=false;
+    online.firstChild.textContent=say('Онлайн-бронирование ','Online Booking ');
+    const modal=document.getElementById('booking-modal');
+    set('booking-modal-label',say('Бронирование','Booking'));
+    set('booking-modal-title',say('Онлайн-бронирование подключается','Online booking is coming soon'));
+    set('booking-modal-text',say('Пока номер можно забронировать через отдел бронирования.','For now, book this room through the reservations team.'));
+    document.getElementById('booking-modal-close').setAttribute('aria-label',say('Закрыть','Close'));
+    const close=()=>{modal.hidden=true;document.body.classList.remove('booking-modal-open');online.focus()};
+    const open=()=>{modal.hidden=false;document.body.classList.add('booking-modal-open');document.body.classList.remove('detail-menu-open');document.getElementById('detail-menu').inert=true;document.getElementById('detail-burger').setAttribute('aria-expanded','false');document.getElementById('booking-modal-close').focus()};
+    document.querySelectorAll('[data-online-book],.detail-header [data-detail-book],.detail-menu [data-detail-book]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();open()}));
+    document.getElementById('booking-modal-close').addEventListener('click',close);
+    modal.addEventListener('click',event=>{if(event.target===modal)close()});
+    addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden)close()});
+  }
   const burger=document.getElementById('detail-burger'),menu=document.getElementById('detail-menu');
   const toggle=(open)=>{
     document.body.classList.toggle('detail-menu-open',open);

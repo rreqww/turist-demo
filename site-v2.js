@@ -18,8 +18,8 @@
     }).join('');
   }
 
-  document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.addEventListener('click',()=>{
-    const rail=document.getElementById('room-cards');
+  document.querySelectorAll('[data-slide]').forEach(button=>button.addEventListener('click',()=>{
+    const rail=document.getElementById(button.dataset.slide==='offers'?'offer-cards':'room-cards');
     const card=rail?.querySelector('.new-card');
     if(card)rail.scrollBy({left:parseInt(button.dataset.dir,10)*(card.getBoundingClientRect().width+18),behavior:'smooth'});
   }));
@@ -56,7 +56,12 @@
   const cue=document.querySelector('.h-meta .cue');
   if(cue)cue.innerHTML=localized('Листайте','Scroll')+' <i></i>';
   set('#hsub','гостиничный комплекс','hotel complex');
-  set('#htitle','В самом сердце города','At the Heart of the City');
+  const heroTitle=document.getElementById('htitle');
+  if(heroTitle){
+    const title=localized('В самом сердце города','At the Heart of the City');
+    heroTitle.setAttribute('aria-label',title);
+    heroTitle.innerHTML=title.split(/\s+/).map((word,i)=>`<span class="w" aria-hidden="true" style="--th:${(i*.1).toFixed(2)}">${word}</span>`).join(' ');
+  }
   set('.h-lead','Рядом драматический и кукольный театры, а также Ивановский историко-краеведческий музей имени Д. Г. Бурылина.','Close to the drama and puppet theatres and the Ivanovo Museum of Local History.');
   set('#booking-panel span','Онлайн-бронирование подключается','Online booking is coming soon');
   set('#booking-panel a','Пока можно забронировать по телефону: +7 (4932) 48-27-27','For now, book by phone: +7 (4932) 48-27-27');
@@ -65,6 +70,11 @@
   set('#rooms-new h2','Номера','Rooms');
   set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
   set('.carousel-hint','Листайте номера','Explore the rooms');
+  set('.offers-hint','Листайте предложения','Explore the offers');
+  document.querySelectorAll('[data-slide="offers"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующее предложение':'Предыдущее предложение',button.dataset.dir==='1'?'Next offer':'Previous offer')));
+  document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
+  set('#restaurant .mobile-scroll-hint','← Листайте карточки →','← Swipe through the cards →');
+  set('#conference .mobile-scroll-hint','← Листайте залы →','← Swipe through the halls →');
   set('#restaurant .new-eyebrow','Вкус и атмосфера','Taste & Atmosphere');
   set('#restaurant .restaurant-intro p','Завтраки, встречи и события в самом центре Иванова. Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo. Find a space for your occasion.');
   set('#conference .new-eyebrow','Деловые события','Business Events');

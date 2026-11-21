@@ -29,7 +29,6 @@
       <a href="legal.html">Правовая информация</a>
     </nav>
     <div class="detail-menu-side"><p><strong>Отдел бронирования</strong><a href="tel:+74932482727">+7 (4932) 48-27-27</a></p><p><strong>Язык</strong><a data-lang="ru" href="#">RU</a> · <a data-lang="en" href="#">EN</a></p></div>
-    <img src="assets/brand/building.png" alt="" aria-hidden="true">
   </div>
   <main>
     <section class="detail-hero">
@@ -39,19 +38,20 @@
         <p class="new-eyebrow" id="detail-meta"></p>
         <h1 id="detail-title"></h1>
         <p class="detail-intro" id="detail-intro"></p>
+        <button class="detail-hero-book" type="button" id="detail-online-book" data-online-book hidden>Онлайн-бронирование <span aria-hidden="true">↗</span></button>
       </div>
     </section>
     <section class="detail-body">
       <div class="wrap">
         <div class="detail-facts" id="detail-facts"></div>
-        <p class="detail-rate-note" id="detail-rate-note" hidden></p>
         <div class="detail-copy" id="detail-copy"></div>
-        <div class="detail-gallery-wrap" id="detail-gallery-wrap"><p class="new-eyebrow" id="gallery-label">Галерея</p><div class="detail-gallery" id="detail-gallery"></div></div>
+        <div class="detail-gallery-wrap" id="detail-gallery-wrap"><div class="detail-gallery-head"><p class="new-eyebrow" id="gallery-label">Галерея</p><div class="detail-gallery-controls"><span id="gallery-hint">Листайте фотографии</span><button type="button" data-gallery-dir="-1" aria-label="Предыдущая фотография">←</button><button type="button" data-gallery-dir="1" aria-label="Следующая фотография">→</button></div></div><div class="detail-gallery" id="detail-gallery"></div></div>
         <div class="detail-cta"><div><p class="new-eyebrow" id="detail-cta-label">Планируете поездку или событие?</p><h2 id="detail-cta-title">Мы поможем с выбором</h2><p id="detail-cta-text">Свяжитесь с командой гостиницы, чтобы уточнить доступность, условия и детали.</p></div><div class="detail-cta-actions"><a class="detail-cta-phone" id="detail-phone" href="tel:+74932482727">+7 (4932) 48-27-27</a><a id="detail-email" href="mailto:booking@tourist37.ru">booking@tourist37.ru</a><a class="detail-cta-book" href="index.html#top" data-detail-book>Бронирование</a></div></div>
         <a class="detail-back bottom-back" id="detail-back-bottom" href="index.html#rooms-new">← Назад к разделу</a>
       </div>
     </section>
   </main>
+  <div class="booking-modal" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" hidden><div class="booking-modal-card"><button type="button" id="booking-modal-close" aria-label="Закрыть">×</button><p class="new-eyebrow" id="booking-modal-label">Бронирование</p><h2 id="booking-modal-title">Онлайн-бронирование подключается</h2><p id="booking-modal-text">Пока номер можно забронировать через отдел бронирования.</p><a href="tel:+74932482727">+7 (4932) 48-27-27</a><a href="mailto:booking@tourist37.ru">booking@tourist37.ru</a><div id="booking-widget-slot" hidden></div></div></div>
   <script src="content.js" defer></script>
   <script src="detail.js" defer></script>
 </body>
