@@ -66,7 +66,7 @@
   }));
   set('detail-cta-label',say('Планируете поездку или событие?','Planning a stay or event?'));
   set('detail-cta-title',say('Поможем всё организовать','Let us help you plan'));
-  set('detail-cta-text',say('Уточните свободные даты, условия и детали у команды гостиницы. Онлайн-бронирование появится после подключения модуля.','Ask the hotel team about availability, terms and details. Online booking will be available after the booking module is connected.'));
+  set('detail-cta-text',say('Для бронирования номера или организации события свяжитесь с командой гостиницы.','Contact the hotel team to book a room or arrange an event.'));
   const restaurant=kind==='restaurant'||id==='wedding'||id==='groups'||id==='guides';
   if(restaurant){
     const phone=document.getElementById('detail-phone'),email=document.getElementById('detail-email');
