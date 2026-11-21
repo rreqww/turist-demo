@@ -238,12 +238,12 @@ body{background:var(--paper)}
 .carousel-hint{white-space:nowrap}
 .menu-side{font-size:21px;line-height:1.4}
 .menu-side b{font-size:14px;margin-bottom:10px}
-.ft-photo .ft-photo-logo{position:absolute;z-index:3;left:50%;bottom:50px;width:min(54vw,510px);height:auto;object-fit:contain;transform:translateX(-50%);filter:brightness(0) invert(1);opacity:.9}
+.ft-photo .ft-photo-logo{position:absolute;z-index:3;left:50%;bottom:8%;width:min(76vw,1095px);height:auto;object-fit:contain;transform:translateX(-50%);filter:drop-shadow(0 3px 14px rgba(4,24,17,.6));opacity:.76}
 @media(max-width:720px){
   .carousel-controls{justify-content:center;text-align:center}
   .carousel-controls>div{display:none}
   .mobile-scroll-hint{text-align:center}
-  .ft-photo .ft-photo-logo{width:240px;bottom:50px}
+  .ft-photo .ft-photo-logo{width:86vw;bottom:12%}
   .detail-gallery-head{flex-direction:row;align-items:center;margin-bottom:14px;padding-right:18px}
   .detail-gallery-head .new-eyebrow{font-size:24px}
   .detail-gallery-controls span{display:block;margin-right:0;font-size:14px;white-space:nowrap}
