@@ -95,8 +95,9 @@
   document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
   set('#restaurant .mobile-scroll-hint','← Листайте карточки →','← Swipe through the cards →');
   set('#conference .mobile-scroll-hint','← Листайте залы →','← Swipe through the halls →');
-  set('#restaurant .new-eyebrow','Вкус и атмосфера','Taste & Atmosphere');
-  set('#restaurant .restaurant-intro p','Завтраки, встречи и события в самом центре Иванова. Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo. Find a space for your occasion.');
+  set('#restaurant .new-eyebrow','Банкеты и торжества','Banquets & Celebrations');
+  set('#restaurant h2','Рестораны','Restaurants');
+  set('#restaurant .new-heading p','Завтраки, встречи и события в самом центре Иванова. Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo. Find a space for your occasion.');
   set('#conference .new-eyebrow','Деловые события','Business Events');
   set('#conference h2','Конференц-залы','Conference Halls');
   set('#conference .new-heading p','Два пространства для встреч, презентаций и мероприятий: большой зал до 120 гостей и малый зал до 50 гостей.','Two spaces for meetings and events: the large hall seats up to 120 guests and the small hall up to 50.');
