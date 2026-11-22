@@ -217,8 +217,6 @@ button{font:inherit;color:inherit}
 /* ---------- мелочи ---------- */
 .toast{position:fixed;left:50%;bottom:22px;z-index:90;max-width:min(92vw,520px);padding:14px 20px;border:1px solid rgba(168,159,124,.5);border-radius:14px;background:var(--ink);color:var(--cream);font-size:14px;visibility:hidden;transform:translate(-50%,calc(100% + 40px));transition:transform .7s var(--ease),visibility 0s .7s}
 .toast.show{visibility:visible;transform:translate(-50%,0);transition:transform .7s var(--ease)}
-body::after{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;background-image:var(--grain,none);opacity:.07;mix-blend-mode:multiply;animation:grain 90s linear infinite}
-@keyframes grain{to{transform:translate(12%,-8%)}}
 .js .rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease) var(--d,0s),transform 1.2s var(--ease) var(--d,0s)}
 .js .rv.in{opacity:1;transform:none}
 body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
@@ -275,7 +273,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
 <header class="hdr" id="hdr">
   <a class="brand" href="#top" aria-label="Гостиничный комплекс «Турист», на главную">
-    <img src="assets/brand/hotel-logo.png" alt="Турист">
+    <img src="assets/brand/hotel-logo.svg" alt="Турист">
   </a>
   <nav class="nav" aria-label="Основные разделы">
     <a href="#rooms">Номера</a>
@@ -318,20 +316,16 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       <div class="h-shade"></div>
       <svg class="h-svg" id="hsvg" aria-hidden="true">
         <defs>
-           <pattern id="p0" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><circle cx="5" cy="5" r="2.1" fill="#e3ece7"/></pattern>
-           <pattern id="p1" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10" patternTransform="rotate(38)"><rect width="10" height="10" fill="#103b2f"/><rect width="3.2" height="10" fill="#e3ece7"/></pattern>
-           <pattern id="p2" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><path d="M5 1.2 8.8 5 5 8.8 1.2 5Z" fill="#e3ece7"/></pattern>
-           <pattern id="p3" patternUnits="userSpaceOnUse" viewBox="0 0 10 10" width="10" height="10"><rect width="10" height="10" fill="#103b2f"/><rect width="2.6" height="10" fill="#e3ece7"/></pattern>
           <mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
             <rect id="mrect" x="0" y="0" width="100" height="100" fill="#fff"/>
             <g id="zgM"></g>
           </mask>
         </defs>
-         <rect id="cover" x="0" y="0" width="100" height="100" fill="#e3ece7" mask="url(#hm)"/>
+         <rect id="cover" x="0" y="0" width="100" height="100" fill="#F0ECE1" mask="url(#hm)"/>
         <g id="zgP"></g>
         <g id="deco">
           <g id="stars"></g>
-           <text id="hsub" class="hsub" text-anchor="middle" font-family="AvantGardeCTT, Century Gothic, sans-serif" font-weight="400">гостиничный комплекс</text>
+           <path id="hsub" class="hsub" fill-rule="nonzero"/>
         </g>
       </svg>
       <div class="h-meta"><div class="h-meta-in" id="hmeta">
@@ -440,15 +434,6 @@ const RM = matchMedia('(prefers-reduced-motion: reduce)');
 const NS = 'http://www.w3.org/2000/svg';
 document.documentElement.classList.add('js');
 
-/* ---------- зерно: один раз рисуем шум ---------- */
-try {
-  const c = document.createElement('canvas'); c.width = c.height = 180;
-  const x = c.getContext('2d'); const d = x.createImageData(180, 180);
-  for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i+1] = d.data[i+2] = v; d.data[i+3] = 255; }
-  x.putImageData(d, 0, 0);
-  document.body.style.setProperty('--grain', `url(${c.toDataURL()})`);
-} catch (e) {}
-
 /* ---------- тост ---------- */
 const toastEl = $('#toast'); let toastT;
 function toast(msg) {
@@ -484,6 +469,7 @@ const stage = $('#stage'), hero = $('#top'), svg = $('#hsvg'), hdr = $('#hdr');
 const zgM = $('#zgM'), zgP = $('#zgP'), cover = $('#cover'), mrect = $('#mrect'), mask = $('#hm');
 const starsG = $('#stars'), hsub = $('#hsub'), deco = $('#deco'), hmeta = $('#hmeta'), hfinal = $('#hfinal'), himg = $('#himg');
 const WORD = 'ТУРИСТ', BRAND_WORD = window.TOURIST_BRAND_WORD;
+const BRAND_STARS = window.TOURIST_BRAND_STARS, BRAND_SUBTITLE = window.TOURIST_BRAND_SUBTITLE;
 let L = null;          // раскладка
 let lastW = 0, lastH = 0;
 
@@ -493,15 +479,6 @@ let lastW = 0, lastH = 0;
   t.setAttribute('aria-label', t.textContent.trim());
   t.innerHTML = words.map((w, i) => `<span class="w" aria-hidden="true" style="--th:${(i * 0.1).toFixed(2)}">${w}</span>`).join(' ');
 })();
-
-function starPath(cx, cy, R) {
-  let d = '';
-  for (let i = 0; i < 10; i++) {
-    const r = i % 2 ? R * 0.46 : R, a = -Math.PI / 2 + i * Math.PI / 5;
-    d += (i ? 'L' : 'M') + (cx + r * Math.cos(a)).toFixed(2) + ' ' + (cy + r * Math.sin(a)).toFixed(2);
-  }
-  return d + 'Z';
-}
 
 function layoutHero() {
   const W = stage.clientWidth, H = stage.clientHeight;
@@ -529,7 +506,8 @@ function layoutHero() {
   // Фирменные контуры букв из исходного PDF: порядок орнаментов уже внутри путей.
   zgM.textContent = ''; zgP.textContent = '';
   const brandScale=totalW/142.4;
-  const brandTransform=`translate(${(x0-73.7*brandScale).toFixed(2)} ${(base-549.7*brandScale).toFixed(2)}) scale(${brandScale.toFixed(5)})`;
+  const brandTop=H*(W<720?.44:.5)-(568.4-502.8)*brandScale/2;
+  const brandTransform=`translate(${(x0-73.7*brandScale).toFixed(2)} ${(brandTop-502.8*brandScale).toFixed(2)}) scale(${brandScale.toFixed(5)})`;
   const maskLetters=document.createElementNS(NS,'g'), patternLetters=document.createElementNS(NS,'g');
   maskLetters.setAttribute('transform',brandTransform);
   patternLetters.setAttribute('transform',brandTransform);
@@ -544,22 +522,24 @@ function layoutHero() {
       return path;
     };
     maskLetters.appendChild(make('ml','#000'));
-    patternLetters.appendChild(make('pl','#103b2f'));
+    patternLetters.appendChild(make('pl','#1C2B23'));
   });
   zgM.appendChild(maskLetters);
   zgP.appendChild(patternLetters);
 
-  // звёзды и подпись, как в логотипе
+  // Звёзды и подпись используют исходные контуры и пропорции из PDF.
   starsG.textContent = '';
-  const sR = totalW * 0.034, gap = totalW * 0.135, sy = top + sR;
-  for (let i = 0; i < 4; i++) {
+  starsG.setAttribute('transform', brandTransform);
+  BRAND_STARS.forEach((star, i) => {
     const p = document.createElementNS(NS, 'path');
-    p.setAttribute('d', starPath(W / 2 + (i - 1.5) * gap, sy, sR));
+    p.setAttribute('d', star.d);
+    p.setAttribute('fill-rule', star.rule);
     p.setAttribute('class', 'st'); p.style.setProperty('--i', i);
     starsG.appendChild(p);
-  }
-  hsub.setAttribute('x', W / 2); hsub.setAttribute('y', (base + F * 0.3).toFixed(2));
-  hsub.setAttribute('font-size', (F * 0.118).toFixed(2));
+  });
+  hsub.setAttribute('d', BRAND_SUBTITLE.d);
+  hsub.setAttribute('fill-rule', BRAND_SUBTITLE.rule);
+  hsub.setAttribute('transform', brandTransform);
 
   // точка, в которую «влетаем»: самое толстое место штриха ближе к центру
   const r = Math.min(1, 560 / totalW), pad = 6;
