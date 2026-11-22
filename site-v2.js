@@ -82,7 +82,6 @@
   set('#booking-panel span','Онлайн-бронирование подключается','Online booking is coming soon');
   set('#booking-panel a','Пока можно забронировать по телефону: +7 (4932) 48-27-27','For now, book by phone: +7 (4932) 48-27-27');
 
-  set('#rooms-new .new-eyebrow','Гостиничный комплекс «Турист»','Tourist Hotel Complex');
   set('#rooms-new h2','Номера','Rooms');
   set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
   set('.carousel-hint','← Свайпайте номера →','← Swipe through rooms →');

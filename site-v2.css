@@ -77,7 +77,7 @@ body{background:var(--paper)}
 .new-section-dark .new-card{aspect-ratio:1/1.02}
 .conference-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .conference-grid .new-card{aspect-ratio:1.25/1}
-.offers-section{background:var(--ink)!important;color:#fff}
+.offers-section{background:var(--ink)!important;color:var(--cream)}
 .offers-section .new-heading h2{font-size:clamp(45px,6.4vw,94px)}
 .ft{background:var(--ink);color:var(--cream);padding-top:0}
 .ft-mark{padding:75px var(--gutter) 20px;overflow:hidden}
@@ -265,9 +265,9 @@ body{background:var(--paper)}
 
 /* Тёмная фирменная палитра, тёплые фоны и чистые фотографии. */
 body{font-size:18px}
-.new-section-dark{color:#fff}
-.new-section-dark .new-heading p,.restaurant-intro p{color:#fff;font-weight:600}
-.new-heading p,.detail-copy p,.detail-hero .detail-intro,.detail-cta p:not(.new-eyebrow),.detail-copy li,.ft-grid p{font-weight:600}
+.new-section-dark{color:var(--cream)}
+.new-section-dark .new-heading p,.restaurant-intro p{color:var(--cream);font-weight:400}
+.new-heading p,.detail-copy p,.detail-hero .detail-intro,.detail-cta p:not(.new-eyebrow),.detail-copy li,.ft-grid p{font-weight:400}
 .new-card .card-meta{font-weight:500}
 .new-section-dark .mobile-scroll-hint{color:var(--cream)}
 .new-section-dark .new-card.no-photo{background:linear-gradient(145deg,#243b2d,#56634b)}
@@ -277,13 +277,12 @@ body{font-size:18px}
 .detail-gallery-wrap{background:#e9e4d9}
 
 /* Читаемый текст на светлом блоке номеров и тёмный финальный раздел. */
-#rooms-new .new-eyebrow{color:var(--ink);font-weight:700}
 #rooms-new .new-heading p{color:var(--ink)}
 #rooms-new .carousel-controls{color:var(--ink)}
 .offers-section .new-eyebrow{color:var(--gold-hi)}
-.offers-section .new-heading p{color:#fff}
+.offers-section .new-heading p{color:var(--cream)}
 .offers-section .carousel-controls{color:var(--cream)}
-.offers-section .carousel-arrow{color:#fff}
+.offers-section .carousel-arrow{color:var(--cream)}
 .offers-section .carousel-progress{background:rgba(240,236,225,.36)}
 .offers-section .carousel-progress-fill{background:var(--cream)}
 .offers-section .mobile-scroll-hint{color:var(--cream)}
