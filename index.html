@@ -428,6 +428,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="assets/brand/hero-word.js"></script>
 <script>
 (() => {
 'use strict';
@@ -481,7 +482,7 @@ const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; return m10 
 const stage = $('#stage'), hero = $('#top'), svg = $('#hsvg'), hdr = $('#hdr');
 const zgM = $('#zgM'), zgP = $('#zgP'), cover = $('#cover'), mrect = $('#mrect'), mask = $('#hm');
 const starsG = $('#stars'), hsub = $('#hsub'), deco = $('#deco'), hmeta = $('#hmeta'), hfinal = $('#hfinal'), himg = $('#himg');
-const WORD = 'ТУРИСТ', PATS = ['url(#p0)', 'url(#p1)', 'url(#p2)', 'url(#p3)', '#103b2f', 'url(#p0)'];
+const WORD = 'ТУРИСТ', BRAND_WORD = window.TOURIST_BRAND_WORD;
 let L = null;          // раскладка
 let lastW = 0, lastH = 0;
 
@@ -524,22 +525,28 @@ function layoutHero() {
   const base = top + F * 0.18 + F * 0.16 + cap;
   let x = x0; const xs = adv.map(a => { const cur = x; x += (a + ls) * k; return cur; });
 
-  // буквы: маска и узорный слой
+  // Фирменные контуры букв из исходного PDF: порядок орнаментов уже внутри путей.
   zgM.textContent = ''; zgP.textContent = '';
-  [...WORD].forEach((ch, i) => {
-    const mk = (cls, fill) => {
-      const t = document.createElementNS(NS, 'text');
-      t.setAttribute('x', xs[i].toFixed(2)); t.setAttribute('y', base.toFixed(2));
-       t.setAttribute('font-family', 'AvantGardeCTT, Century Gothic, sans-serif'); t.setAttribute('font-weight', '700');
-      t.setAttribute('font-size', F.toFixed(2)); t.setAttribute('class', cls); t.style.setProperty('--i', i);
-      if (fill) t.setAttribute('fill', fill);
-      t.textContent = ch; return t;
+  const brandScale=totalW/142.4;
+  const brandTransform=`translate(${(x0-73.7*brandScale).toFixed(2)} ${(base-549.7*brandScale).toFixed(2)}) scale(${brandScale.toFixed(5)})`;
+  const maskLetters=document.createElementNS(NS,'g'), patternLetters=document.createElementNS(NS,'g');
+  maskLetters.setAttribute('transform',brandTransform);
+  patternLetters.setAttribute('transform',brandTransform);
+  BRAND_WORD.forEach((letter,i)=>{
+    const make=(cls,fill)=>{
+      const path=document.createElementNS(NS,'path');
+      path.setAttribute('d',letter.d);
+      path.setAttribute('fill-rule',letter.rule);
+      path.setAttribute('class',cls);
+      path.setAttribute('fill',fill);
+      path.style.setProperty('--i',i);
+      return path;
     };
-    zgM.appendChild(mk('ml'));
-    zgP.appendChild(mk('pl', PATS[i]));
+    maskLetters.appendChild(make('ml','#000'));
+    patternLetters.appendChild(make('pl','#103b2f'));
   });
-  const cell = Math.max(5, F * 0.055);
-  ['p0', 'p1', 'p2', 'p3'].forEach(id => { const p = document.getElementById(id); p.setAttribute('width', cell); p.setAttribute('height', cell); });
+  zgM.appendChild(maskLetters);
+  zgP.appendChild(patternLetters);
 
   // звёзды и подпись, как в логотипе
   starsG.textContent = '';

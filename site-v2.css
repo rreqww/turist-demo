@@ -7,6 +7,7 @@ body{background:var(--paper)}
 .nav{gap:clamp(20px,2.7vw,42px)}.nav a{font-size:16px}
 .stage{background:var(--cream)}.h-img{z-index:0;background-image:url('assets/hero-poster.jpg')!important;background-size:cover}.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}.hero-video-tall{display:none}
 .h-photo{isolation:isolate}.h-shade{z-index:2}.h-svg{z-index:3}.h-meta,.h-final{z-index:4}
+@media(min-width:721px){.h-meta-in{font-size:18px}}
 .flood .pl{fill-opacity:.32;stroke-opacity:.22}
 .h-title{font-weight:700}.booking-pending{display:flex;flex-wrap:wrap;align-items:center;gap:12px 30px;width:max-content;max-width:100%;padding:18px 24px;border:1px solid rgba(255,255,255,.3);border-radius:14px;background:rgba(16,47,34,.75);backdrop-filter:blur(12px);pointer-events:auto;opacity:var(--kb,0);transform:translateY(calc((1 - var(--kb,0))*30px));font-size:15px;visibility:hidden}.book-live .booking-pending{visibility:visible}
 .booking-pending span{font-weight:700}.booking-pending a{color:inherit;text-underline-offset:4px}
@@ -44,6 +45,7 @@ body{background:var(--paper)}
 .legal-page{min-height:100vh;padding:160px var(--gutter) 80px;background:var(--paper)}.legal-page h1{font-size:clamp(42px,7vw,80px);line-height:1}
 @media(max-width:900px){.new-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ft-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.hero-video-wide{display:none}.hero-video-tall{display:block}.new-heading{display:block}.new-heading p{margin-top:20px}.new-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}.new-card{flex:0 0 min(82vw,380px);scroll-snap-align:start}.ft-grid{grid-template-columns:1fr}.booking-pending{font-size:13px;padding:14px}.ft-mark{font-size:20vw}}
+@media(max-width:720px){#rooms-new{padding-top:18px}}
 @media(max-width:720px){.detail-header nav,.detail-header>a:last-child{display:none}.detail-gallery{grid-template-columns:1fr}.detail-hero{min-height:66vh}}
 /* Revised editorial sections */
 .new-section{padding:clamp(76px,8vw,120px) 0}
