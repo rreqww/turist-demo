@@ -14,7 +14,10 @@
     root.innerHTML=list.map(item=>{
       const title=T(item.title),meta=T(item.meta);
       const href=url(`detail.html?kind=${kind}&id=${item.id}`,anchors[kind]);
-      return `<a class="new-card" href="${href}"><img loading="lazy" src="${item.image}" alt="${title}"><span class="card-label"><span class="card-meta">${meta}</span>${title}</span></a>`;
+      const price=kind==='rooms'&&item.price
+        ? `<span class="card-price"><span class="card-price-caption">${localized('от','from')}</span><strong>${item.price.toLocaleString(lang==='en'?'en-US':'ru-RU')} ₽</strong><span class="card-price-unit">${localized('за сутки','per night')}</span></span>`
+        : '';
+      return `<a class="new-card" href="${href}"><img loading="lazy" src="${item.image}" alt="${title}"><span class="card-label"><span class="card-meta">${meta}</span>${title}</span>${price}</a>`;
     }).join('');
   }
 
