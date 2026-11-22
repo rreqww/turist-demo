@@ -81,6 +81,7 @@ button{font:inherit;color:inherit}
 .hero{position:relative;height:340vh}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--cream)}
 .h-photo{position:absolute;inset:0;overflow:hidden}
+.stage:not(.ready) .h-photo,.stage:not(.ready) .h-final{visibility:hidden}
 .h-img{position:absolute;inset:0}
 .h-shade{position:absolute;inset:0;pointer-events:none;opacity:var(--sh,0);background:linear-gradient(180deg,rgba(14,22,17,.3) 0%,rgba(14,22,17,0) 26%,rgba(14,22,17,.12) 46%,rgba(14,22,17,.82) 100%)}
 .h-svg{position:absolute;inset:0;width:100%;height:100%;display:block;visibility:hidden}
@@ -690,18 +691,12 @@ function applyMotionMode() {
 }
 RM.addEventListener('change', applyMotionMode);
 
-const fontsReady = Promise.race([
-  Promise.allSettled([document.fonts.load('700 100px AvantGardeCTT'), document.fonts.load('400 40px AvantGardeCTT')]),
-  new Promise(r => setTimeout(r, 2500))
-]);
-fontsReady.then(() => {
-  layoutHero();
-  applyMotionMode();
-  intro();
-  // если Jost догрузился позже таймаута, пересчитываем слово под настоящие метрики
-  document.fonts.ready.then(() => layoutHero());
-  document.fonts.addEventListener('loadingdone', () => layoutHero());
-});
+// Подготавливаем знак до первого видимого кадра, не ожидая загрузки шрифта.
+layoutHero();
+applyMotionMode();
+intro();
+document.fonts.ready.then(() => layoutHero());
+document.fonts.addEventListener('loadingdone', () => layoutHero());
 
 /* ---------- бронь ---------- */
 const MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
