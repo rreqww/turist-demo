@@ -8,7 +8,7 @@ body{background:var(--paper)}
 .stage{background:var(--cream)}.h-img{z-index:0;background-image:url('assets/hero-poster.jpg')!important;background-size:cover}.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}.hero-video-tall{display:none}
 .h-photo{isolation:isolate}.h-shade{z-index:2}.h-svg{z-index:3}.h-meta,.h-final{z-index:4}
 @media(min-width:721px){.h-meta-in{font-size:18px}}
-.flood .pl{fill-opacity:.32;stroke-opacity:.22}
+.flood .pl{fill-opacity:.24;stroke-opacity:.22}
 .h-title{font-weight:700}.booking-pending{display:flex;flex-wrap:wrap;align-items:center;gap:12px 30px;width:max-content;max-width:100%;padding:18px 24px;border:1px solid rgba(255,255,255,.3);border-radius:14px;background:rgba(28,43,35,.78);backdrop-filter:blur(12px);pointer-events:auto;opacity:var(--kb,0);transform:translateY(calc((1 - var(--kb,0))*30px));font-size:15px;visibility:hidden}.book-live .booking-pending{visibility:visible}
 .booking-pending span{font-weight:700}.booking-pending a{color:inherit;text-underline-offset:4px}
 .book,.rooms,.mq,.hall,.ft-ph,.ft-word{display:none!important}

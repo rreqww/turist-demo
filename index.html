@@ -597,7 +597,7 @@ function apply(p, force) {
   const tr = `translate(${L.zx.toFixed(1)} ${L.zy.toFixed(1)}) scale(${s.toFixed(4)}) translate(${(-L.zx).toFixed(1)} ${(-L.zy).toFixed(1)})`;
   setIf('zm', zgM, 'attr', ['transform', tr]);
   setIf('zp', zgP, 'attr', ['transform', tr]);
-  const co = (1 - ss(0.56, 0.66, p)).toFixed(3);
+  const co = (0.9 * (1 - ss(0.56, 0.66, p))).toFixed(3);
   setIf('co', cover, 'attr', ['opacity', co]);
   setIf('cp', zgP, 'attr', ['opacity', (1 - ss(0.38, 0.54, p)).toFixed(3)]);
   const mo = (1 - ss(0.015, 0.1, p)).toFixed(3);
