@@ -4,10 +4,20 @@
   const requested = new URLSearchParams(w.location.search).get('lang');
   const saved = w.sessionStorage.getItem('tourist-lang');
   const lang = requested === 'en' || requested === 'ru' ? requested : (saved === 'en' ? 'en' : 'ru');
+  const bookingPage = new URL('booking/', w.location.href);
+  // The profile's {host}/booking points outside a GitHub Pages project subpath.
+  // TravelLine supplies the selected dates and guest counts in this URL.
+  function onSearchSubmit(_search, travelLineUrl) {
+    const destination = new URL(bookingPage.href);
+    destination.search = new URL(travelLineUrl, w.location.href).search;
+    if (lang === 'en') destination.searchParams.set('lang', 'en');
+    w.location.assign(destination.href);
+    return false;
+  }
   const q = [
     ['setContext', 'TL-INT-tourist37_2026-11-25', lang],
     ['embed', 'booking-form', { container: 'tl-booking-form' }],
-    ['embed', 'search-form', { container: 'tl-search-form' }]
+    ['embed', 'search-form', { container: 'tl-search-form', onsubmit: onSearchSubmit }]
   ];
   const hosts = ['ru-ibe.tlintegration.ru', 'ibe.tlintegration.ru', 'ibe.tlintegration.com'];
   const t = w.travelline = w.travelline || {};
