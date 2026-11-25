@@ -52,7 +52,18 @@
     document.getElementById('detail-facts').classList.add('four');
   }
   document.getElementById('detail-facts').innerHTML=facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value)}</strong></div>`).join('');
-  document.getElementById('detail-copy').innerHTML=entry.blocks.map(b=>`<section><h2>${T(b.heading)}</h2><div><p>${T(b.text)}</p>${b.items.length?'<ul>'+b.items.map(item=>`<li>${T(item)}</li>`).join('')+'</ul>':''}</div></section>`).join('');
+  const labeledBlocks=new Set(['Время работы','Для каких событий','Аренда:']);
+  const formatItem=(item,block)=>{
+    const value=T(item);
+    if(!labeledBlocks.has(block.heading.ru))return value;
+    const divider=value.includes(':')?value.indexOf(':')+1:value.indexOf(' — ');
+    return divider<0?value:`<span><strong>${value.slice(0,divider)}</strong>${value.slice(divider)}</span>`;
+  };
+  document.getElementById('detail-copy').innerHTML=entry.blocks.map(b=>{
+    const rental=b.heading.ru==='Аренда:';
+    const hours=b.heading.ru==='Время работы';
+    return `<section${rental||hours?` class="${rental?'rental-block':'hours-block'}"`:''}><h2>${T(b.heading)}</h2><div>${T(b.text)?`<p>${T(b.text)}</p>`:''}${b.items.length?'<ul>'+b.items.map(item=>`<li>${formatItem(item,b)}</li>`).join('')+'</ul>':''}</div></section>`;
+  }).join('');
   const gallery=document.getElementById('detail-gallery');
   if(entry.photos||entry.count){
     const prefix=entry.image.slice(0,entry.image.lastIndexOf('/')+1);
