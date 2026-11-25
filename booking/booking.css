@@ -1,0 +1,19 @@
+.booking-page{min-height:100vh;background:#f0ece1;color:#1c2b23}
+.booking-header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px clamp(18px,4vw,56px);border-bottom:1px solid rgba(28,43,35,.18)}
+.booking-brand img{width:clamp(130px,15vw,180px)}
+.booking-header nav{display:flex;align-items:center;gap:clamp(14px,2.6vw,36px)}
+.booking-header nav a{text-decoration:none;font-size:15px}
+.booking-header nav a:hover{text-decoration:underline;text-underline-offset:5px}
+#booking-back-link{padding:12px 20px;border:1px solid currentColor;border-radius:100px;white-space:nowrap}
+.booking-main{max-width:1336px;margin:0 auto;padding:clamp(32px,6vw,88px) clamp(16px,4vw,56px) 80px}
+.booking-intro{max-width:1000px;margin-bottom:clamp(24px,4vw,48px)}
+.booking-eyebrow{margin:0 0 15px;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.booking-intro h1{margin:0 0 18px;font:400 clamp(42px,6.4vw,88px)/1.02 var(--f-disp);overflow-wrap:anywhere}
+.booking-intro>p:last-child{margin:0;max-width:64ch;font-size:clamp(17px,1.8vw,21px);line-height:1.5}
+.booking-form-wrap{min-height:420px;padding:clamp(12px,2vw,28px);background:#fbfaf3;border:1px solid rgba(28,43,35,.16);border-radius:22px}
+.booking-provider{margin:0 0 16px;color:#3f4a3c;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+#tl-booking-form{width:100%;max-width:1208px;margin:0 auto;position:relative;z-index:0}
+.booking-assistance{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;margin-top:24px;font-size:16px}
+.booking-assistance span{font-weight:600}
+.booking-assistance a{text-underline-offset:4px}
+@media(max-width:720px){.booking-header{align-items:flex-start;padding:16px;gap:10px}.booking-brand img{width:112px}.booking-header nav{flex-wrap:wrap;justify-content:flex-end;gap:8px 13px}.booking-header nav a{font-size:13px}#booking-back-link{padding:7px 10px}.booking-main{padding:40px 12px 54px}.booking-intro{padding:0 5px}.booking-form-wrap{padding:9px;min-height:490px;border-radius:16px}.booking-assistance{display:grid;gap:5px;margin-left:5px}}

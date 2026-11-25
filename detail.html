@@ -6,6 +6,7 @@
   <title>Гостиничный комплекс «Турист»</title>
   <meta name="description" content="Номера, рестораны и залы гостиничного комплекса «Турист» в Иванове">
   <link rel="stylesheet" href="site-v2.css">
+  <script src="travelline.js"></script>
 </head>
 <body class="detail-page">
   <header class="detail-header">
@@ -38,7 +39,7 @@
         <p class="new-eyebrow" id="detail-meta"></p>
         <h1 id="detail-title"></h1>
         <p class="detail-intro" id="detail-intro"></p>
-        <button class="detail-hero-book" type="button" id="detail-online-book" data-online-book hidden>Онлайн-бронирование <span aria-hidden="true">↗</span></button>
+        <a class="detail-hero-book" href="booking/" id="detail-online-book" hidden>Онлайн-бронирование <span aria-hidden="true">↗</span></a>
       </div>
     </section>
     <section class="detail-body">
@@ -51,7 +52,6 @@
       </div>
     </section>
   </main>
-  <div class="booking-modal" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" hidden><div class="booking-modal-card"><button type="button" id="booking-modal-close" aria-label="Закрыть">×</button><p class="new-eyebrow" id="booking-modal-label">Бронирование</p><h2 id="booking-modal-title">Онлайн-бронирование подключается</h2><p id="booking-modal-text">Пока номер можно забронировать через отдел бронирования.</p><a href="tel:+74932482727">+7 (4932) 48-27-27</a><a href="mailto:booking@tourist37.ru">booking@tourist37.ru</a><div id="booking-widget-slot" hidden></div></div></div>
   <script src="content.js" defer></script>
   <script src="detail.js" defer></script>
 </body>

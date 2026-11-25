@@ -82,8 +82,7 @@
     heroTitle.innerHTML=title.split(/\s+/).map((word,i)=>`<span class="w" aria-hidden="true" style="--th:${(i*.1).toFixed(2)}">${word}</span>`).join(' ');
   }
   set('.h-lead','Рядом драматический и кукольный театры, а также Ивановский историко-краеведческий музей имени Д. Г. Бурылина.','Close to the drama and puppet theatres and the Ivanovo Museum of Local History.');
-  set('#booking-panel span','Онлайн-бронирование подключается','Online booking is coming soon');
-  set('#booking-panel a','Пока можно забронировать по телефону: +7 (4932) 48-27-27','For now, book by phone: +7 (4932) 48-27-27');
+  set('#tl-search-form a','Подобрать номер →','Find a room →');
 
   set('#rooms-new h2','Номера','Rooms');
   set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
@@ -120,19 +119,7 @@
   set('.ft-bot span:last-child','Набережная улица, 9','9 Naberezhnaya Street');
   document.title=localized('Гостиничный комплекс «Турист» · Иваново','Tourist Hotel Complex · Ivanovo');
 
-  document.addEventListener('click',event=>{
-    const trigger=event.target.closest('[data-book]');
-    if(!trigger)return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    if(document.body.classList.contains('menu-open'))document.querySelector('.burger')?.click();
-    const panel=document.getElementById('booking-panel');
-    if(!panel)return;
-    const hero=document.getElementById('top'),stage=document.getElementById('stage');
-    const range=hero.offsetHeight-stage.clientHeight;
-    window.scrollTo({top:hero.offsetTop+range*.9,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-    panel.classList.add('booking-attention');
-  },true);
+  document.querySelectorAll('a[data-book]').forEach(a=>a.href=url('booking/'));
 
   const heroPanel=document.getElementById('hfinal');
   const syncHeroText=()=>{

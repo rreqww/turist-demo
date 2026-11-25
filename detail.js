@@ -8,6 +8,10 @@
   const say=(ru,english)=>en?english:ru;
   const section={rooms:'rooms-new',restaurant:'restaurant',conference:'conference',offers:'offers'}[kind];
   const url=(path,hash)=>window.TOURIST_URL(path,hash);
+  // TravelLine room IDs from the supplied links_room.html; multi-ID categories
+  // include both bed layouts rather than opening an unrelated room.
+  const roomIds={standard:'42421,43215','standard-plus':'231745',business:'42422,118129',superior:'42423','deluxe-twin':'221436','deluxe-sofa':'221428'};
+  const bookingUrl=url(`booking/${kind==='rooms'&&roomIds[id]?`?room-type=${roomIds[id]}`:''}`);
   if(!entry){location.replace(url('index.html'));return}
   const set=(id,value)=>document.getElementById(id).textContent=value;
   document.title=`${T(entry.title)} · ${say('Гостиничный комплекс «Турист»','Tourist Hotel Complex')}`;
@@ -16,11 +20,12 @@
   document.querySelectorAll('.detail-header nav a').forEach((a,i)=>{a.href=url('index.html',['rooms-new','restaurant','conference','offers'][i]);a.textContent=say(...navLabels[i])});
   const menuLabels=[['Бронирование','Booking'],['Номера и цены','Rooms & Rates'],['Ресторан','Restaurant'],['Конференц-залы','Conference Halls'],['Спецпредложения','Special Offers'],['Контакты','Contacts'],['Правовая информация','Legal Information']];
   document.querySelectorAll('.detail-menu nav a').forEach((a,i)=>{
+    if(i===0)a.href=bookingUrl;
     if(i>0&&i<6)a.href=url('index.html',['','rooms-new','restaurant','conference','offers','contacts'][i]);
     if(i===6)a.href=url('legal.html');
     a.textContent=say(...menuLabels[i]);
   });
-  document.querySelectorAll('[data-detail-book]').forEach(a=>{a.href='#detail-cta';a.textContent=say('Забронировать','Book Now')});
+  document.querySelectorAll('[data-detail-book]').forEach(a=>{a.href=bookingUrl;a.textContent=say('Забронировать','Book Now')});
   document.querySelector('.detail-menu-side strong').textContent=say('Отдел бронирования','Reservations');
   document.querySelectorAll('.detail-menu-side strong')[1].textContent=say('Язык','Language');
   document.querySelectorAll('[data-lang]').forEach(a=>{
@@ -75,8 +80,8 @@
   }
   const call=document.querySelector('.detail-cta-book');
   call.removeAttribute('data-detail-book');
-  call.href=restaurant?'tel:+79016969272':'tel:+74932482727';
-  call.textContent=say('Позвонить','Call Us');
+  call.href=kind==='rooms'?bookingUrl:restaurant?'tel:+79016969272':'tel:+74932482727';
+  call.textContent=kind==='rooms'?say('Забронировать онлайн','Book Online'):say('Позвонить','Call Us');
   const cta=document.querySelector('.detail-cta');
   cta.id='detail-cta';
   cta.style.setProperty('--cta-photo',`url("${entry.image}")`);
@@ -84,17 +89,7 @@
     const online=document.getElementById('detail-online-book');
     online.hidden=false;
     online.firstChild.textContent=say('Онлайн-бронирование ','Online Booking ');
-    const modal=document.getElementById('booking-modal');
-    set('booking-modal-label',say('Бронирование','Booking'));
-    set('booking-modal-title',say('Онлайн-бронирование подключается','Online booking is coming soon'));
-    set('booking-modal-text',say('Пока номер можно забронировать через отдел бронирования.','For now, book this room through the reservations team.'));
-    document.getElementById('booking-modal-close').setAttribute('aria-label',say('Закрыть','Close'));
-    const close=()=>{modal.hidden=true;document.body.classList.remove('booking-modal-open');online.focus()};
-    const open=()=>{modal.hidden=false;document.body.classList.add('booking-modal-open');document.body.classList.remove('detail-menu-open');document.getElementById('detail-menu').inert=true;document.getElementById('detail-burger').setAttribute('aria-expanded','false');document.getElementById('booking-modal-close').focus()};
-    document.querySelectorAll('[data-online-book],.detail-header [data-detail-book],.detail-menu [data-detail-book]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();open()}));
-    document.getElementById('booking-modal-close').addEventListener('click',close);
-    modal.addEventListener('click',event=>{if(event.target===modal)close()});
-    addEventListener('keydown',event=>{if(event.key==='Escape'&&!modal.hidden)close()});
+    online.href=bookingUrl;
   }
   const burger=document.getElementById('detail-burger'),menu=document.getElementById('detail-menu');
   const toggle=(open)=>{

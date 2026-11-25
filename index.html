@@ -4,6 +4,7 @@
 <title>Гостиница «Турист» · Иваново</title>
 <meta name="description" content="Гостиничный комплекс «Турист» в самом сердце Иваново: номера, ресторан, банкетные и конференц-залы. Набережная улица, 9.">
 <meta name="theme-color" content="#1C2B23">
+<script src="travelline.js"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231C2B23'/%3E%3Cpath d='M16 5l3.2 7.1 7.8.8-5.9 5.2 1.7 7.6L16 21.8l-6.8 3.9 1.7-7.6L5 12.9l7.8-.8z' fill='%23A89F7C'/%3E%3C/svg%3E">
 <!-- DEPLOY STEP: og:image и og:url с абсолютным адресом после публикации -->
 <style>
@@ -283,7 +284,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   </nav>
   <div class="hdr-r">
     <a class="tel" href="tel:+74932482727">+7 (4932) 48-27-27</a>
-    <button class="btn" type="button" data-book>Забронировать</button>
+    <a class="btn" href="booking/" data-book>Забронировать</a>
     <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </header>
@@ -291,7 +292,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <div class="menu" id="menu" role="dialog" aria-label="Меню сайта">
   <div class="menu-in">
     <ol>
-      <li style="--i:0"><a href="#top" data-book>Бронирование</a></li>
+      <li style="--i:0"><a href="booking/" data-book>Бронирование</a></li>
       <li style="--i:1"><a href="#rooms">Номера и цены</a></li>
       <li style="--i:2"><a href="#restaurant">Ресторан</a></li>
       <li style="--i:3"><a href="#conference">Конференц-залы</a></li>
@@ -336,16 +337,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <div class="h-final-in">
           <h2 class="h-title" id="htitle">В самом сердце города</h2>
           <p class="h-lead">Рядом драматический и кукольный театры, а&nbsp;также Ивановский историко-краеведческий музей имени Д.Г.&nbsp;Бурылина.</p>
-          <form class="book" id="book" onsubmit="return false" aria-label="Подбор номера">
-            <label class="bf" for="din"><span class="bl">Заезд</span><span class="bv" id="dinv">16 сен</span><input type="date" id="din" name="din" aria-label="Дата заезда"></label>
-            <label class="bf" for="dout"><span class="bl">Выезд</span><span class="bv" id="doutv">17 сен</span><input type="date" id="dout" name="dout" aria-label="Дата выезда"></label>
-            <div class="bf"><span class="bl" id="gl">Гости</span>
-              <div class="gs"><button class="gb" type="button" id="gm" aria-label="Меньше гостей">−</button><span class="bv" id="gv" aria-live="polite">2</span><button class="gb" type="button" id="gp" aria-label="Больше гостей">+</button></div>
-            </div>
-            <div class="bf bsum"><span class="bl" id="nights">1 ночь</span><span class="bv">от<span class="odo" id="total" aria-hidden="true"></span>₽</span><span class="sr" id="totalsr" aria-live="polite"></span></div>
-            <div class="bgo"><button class="btn btn-gold" type="submit" id="find">Найти номер <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
-          </form>
-          <div class="booking-pending" id="booking-panel"><span>Онлайн-бронирование подключается</span><a href="tel:+74932482727">Пока можно забронировать по телефону: +7 (4932) 48-27-27</a></div>
+          <div class="tl-search-shell" id="block-search">
+            <div id="tl-search-form" class="tl-container"><a href="booking/">Подобрать номер →</a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -359,7 +353,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <p class="lead rv" style="--d:.15s">Широкий выбор номеров различных категорий, соответствующих высоким стандартам качества.</p>
         <ol class="rlist" id="rlist"></ol>
         <p class="rhint">Листайте карточки вбок</p>
-        <a class="link rv" href="#top" data-book>Выбрать даты <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        <a class="link rv" href="booking/" data-book>Выбрать даты <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
       </div>
       <div class="rooms-r rv" style="--d:.1s">
         <div class="rstage-wrap">
@@ -368,7 +362,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
               <div class="rname" id="rname"></div>
               <div class="rbed" id="rbed"></div>
               <div class="rprice">от<span class="odo" id="rprice" aria-hidden="true"></span>₽ <span style="opacity:.7">/ сутки</span></div>
-              <button class="btn" type="button" data-book>Забронировать</button>
+              <a class="btn" href="booking/" data-book>Забронировать</a>
             </div>
           </div>
           <div class="rinset" aria-hidden="true"><div class="rinset-in" id="rinset" data-par="0.08"></div></div>
@@ -683,55 +677,6 @@ applyMotionMode();
 intro();
 document.fonts.ready.then(() => layoutHero());
 document.fonts.addEventListener('loadingdone', () => layoutHero());
-
-/* ---------- бронь ---------- */
-const MON = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-const WD = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-const din = $('#din'), dout = $('#dout');
-const iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-const parse = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
-let guests = 2;
-const MIN_PRICE = 4200;
-(() => {
-  const t = new Date(); t.setHours(0, 0, 0, 0);
-  const n = new Date(t); n.setDate(t.getDate() + 1);
-  din.value = iso(t); din.min = iso(t); dout.value = iso(n); dout.min = iso(n);
-})();
-function showDate(el, v) { const d = parse(v); el.innerHTML = `${d.getDate()} ${MON[d.getMonth()]}<small>${WD[d.getDay()]}</small>`; }
-function syncBook() {
-  let a = parse(din.value), b = parse(dout.value);
-  if (!(b > a)) { b = new Date(a); b.setDate(a.getDate() + 1); dout.value = iso(b); }
-  const nd = new Date(a); nd.setDate(a.getDate() + 1); dout.min = iso(nd);
-  showDate($('#dinv'), din.value); showDate($('#doutv'), dout.value);
-  const nights = Math.round((b - a) / 864e5);
-  $('#nights').textContent = `${nights} ${plural(nights, 'ночь', 'ночи', 'ночей')}`;
-  const sum = fmt(nights * MIN_PRICE);
-  odo($('#total'), sum);
-  $('#totalsr').textContent = `от ${sum} рублей за ${nights} ${plural(nights, 'ночь', 'ночи', 'ночей')}`;
-  $('#gv').textContent = guests;
-  $('#gl').textContent = plural(guests, 'Гость', 'Гостя', 'Гостей');
-}
-[din, dout].forEach(inp => {
-  inp.addEventListener('change', syncBook);
-  inp.addEventListener('click', () => { try { inp.showPicker(); } catch (e) {} });
-});
-$('#gm').addEventListener('click', () => { guests = Math.max(1, guests - 1); syncBook(); });
-$('#gp').addEventListener('click', () => { guests = Math.min(6, guests + 1); syncBook(); });
-$('#find').addEventListener('click', () => {
-  const a = parse(din.value), b = parse(dout.value);
-  toast(`Демо: в рабочей версии здесь откроется бронирование TravelLine на ${a.getDate()} ${MON[a.getMonth()]} · ${b.getDate()} ${MON[b.getMonth()]}, ${guests} ${plural(guests, 'гость', 'гостя', 'гостей')}.`);
-});
-syncBook();
-
-// любая кнопка «Забронировать» ведёт к панели брони на фото
-function goBook() {
-  closeMenu();
-  const range = hero.offsetHeight - stage.clientHeight;
-  const y = hero.offsetTop + range * (RM.matches ? 0 : 0.9);
-  window.scrollTo({ top: y, behavior: RM.matches ? 'auto' : 'smooth' });
-  setTimeout(() => din.focus({ preventScroll: true }), 900);
-}
-document.addEventListener('click', e => { const b = e.target.closest('[data-book]'); if (b) { e.preventDefault(); goBook(); } });
 
 /* ---------- номера ---------- */
 const ROOMS = [

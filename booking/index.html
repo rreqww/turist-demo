@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Онлайн-бронирование номеров гостиничного комплекса «Турист» в Иванове.">
+  <title>Бронирование номеров · Гостиничный комплекс «Турист»</title>
+  <link rel="stylesheet" href="../site-v2.css">
+  <link rel="stylesheet" href="booking.css">
+  <script src="../travelline.js"></script>
+</head>
+<body class="booking-page">
+  <header class="booking-header">
+    <a href="../index.html" class="booking-brand" aria-label="Турист — на главную"><img src="../assets/brand/hotel-logo.svg" alt="Турист"></a>
+    <nav aria-label="Навигация"><a href="../index.html#rooms-new" id="booking-rooms-link">Номера</a><a href="../index.html#contacts" id="booking-contacts-link">Контакты</a><a href="../index.html" id="booking-back-link">← На сайт</a></nav>
+  </header>
+  <main class="booking-main">
+    <div class="booking-intro">
+      <p class="booking-eyebrow" id="booking-eyebrow">Гостиничный комплекс «Турист» · Иваново</p>
+      <h1 id="booking-title">Бронирование номеров</h1>
+      <p id="booking-description">Выберите даты и подходящий номер. Наличие и итоговую стоимость покажет система TravelLine.</p>
+    </div>
+    <div class="booking-form-wrap">
+      <p class="booking-provider" id="booking-provider">Модуль бронирования TravelLine</p>
+      <div id="tl-booking-form"></div>
+    </div>
+    <div class="booking-assistance">
+      <span id="booking-assistance-label">Нужна помощь с бронированием?</span>
+      <a href="tel:+74932482727">+7 (4932) 48-27-27</a>
+      <a href="mailto:booking@tourist37.ru">booking@tourist37.ru</a>
+    </div>
+  </main>
+  <script src="../content.js"></script>
+  <script src="booking.js"></script>
+</body>
+</html>
