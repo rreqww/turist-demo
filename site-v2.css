@@ -197,6 +197,9 @@ body{background:var(--paper)}
 .detail-copy li::before{left:16px}
 .detail-copy li:last-child:nth-child(odd){grid-column:span 2}
 .detail-copy li strong{font-weight:700}
+.detail-copy .contact-value{display:inline-block;white-space:nowrap}
+@media(max-width:360px){.detail-copy .contact-value{font-size:16px}}
+@media(max-width:360px){.detail-hero .wrap{min-width:0}.detail-hero h1{overflow-wrap:anywhere}}
 .detail-copy .hours-block li{min-height:92px}
 .detail-copy .rental-block h2{font-weight:700}
 .detail-copy .rental-block ul{grid-template-columns:1fr;max-width:720px;margin-top:0}

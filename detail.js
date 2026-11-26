@@ -8,9 +8,8 @@
   const say=(ru,english)=>en?english:ru;
   const section={rooms:'rooms-new',restaurant:'restaurant',conference:'conference',offers:'offers'}[kind];
   const url=(path,hash)=>window.TOURIST_URL(path,hash);
-  // TravelLine room IDs from the supplied links_room.html; multi-ID categories
-  // include both bed layouts rather than opening an unrelated room.
-  const roomIds={standard:'42421,43215','standard-plus':'231745',business:'42422,118129',superior:'42423','deluxe-twin':'221436','deluxe-sofa':'221428'};
+  // TravelLine room IDs from the supplied links_room.html.
+  const roomIds={standard:'42421,43215','standard-plus':'231745',business:'118129','business-double':'42422',superior:'42423','deluxe-twin':'221436','deluxe-sofa':'221428'};
   const bookingUrl=url(`booking/${kind==='rooms'&&roomIds[id]?`?room-type=${roomIds[id]}`:''}`);
   if(!entry){location.replace(url('index.html'));return}
   const set=(id,value)=>document.getElementById(id).textContent=value;
@@ -51,27 +50,28 @@
     facts.push({label:{ru:'Цена от',en:'Rate from'},value:{ru:`${rate} ₽ / ночь`,en:`₽${rate} / night`}});
     document.getElementById('detail-facts').classList.add('four');
   }
-  document.getElementById('detail-facts').innerHTML=facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value)}</strong></div>`).join('');
+  document.getElementById('detail-facts').innerHTML=facts.map(f=>`<div><span>${T(f.label)}</span><strong>${T(f.value).replace(/\n/g,'<br>')}</strong></div>`).join('');
+  const formatText=value=>value.split('\n').map(line=>`<p>${line.replace(/\*\*(.*?)\*\*/g,(_match,emphasis)=>`<strong${/^\+7|@/.test(emphasis)?' class="contact-value"':''}>${emphasis}</strong>`)}</p>`).join('');
   const labeledBlocks=new Set(['Время работы','Для каких событий','Аренда:']);
   const formatItem=(item,block)=>{
     const value=T(item);
-    if(!labeledBlocks.has(block.heading.ru))return value;
+    if(!labeledBlocks.has(block.heading.ru))return value.replace(/\n/g,'<br>');
     const divider=value.includes(':')?value.indexOf(':')+1:value.indexOf(' — ');
-    return divider<0?value:`<span><strong>${value.slice(0,divider)}</strong>${value.slice(divider)}</span>`;
+    return divider<0?value.replace(/\n/g,'<br>'):`<span><strong>${value.slice(0,divider)}</strong>${value.slice(divider).replace(/\n/g,'<br>')}</span>`;
   };
   document.getElementById('detail-copy').innerHTML=entry.blocks.map(b=>{
     const rental=b.heading.ru==='Аренда:';
     const hours=b.heading.ru==='Время работы';
-    return `<section${rental||hours?` class="${rental?'rental-block':'hours-block'}"`:''}><h2>${T(b.heading)}</h2><div>${T(b.text)?`<p>${T(b.text)}</p>`:''}${b.items.length?'<ul>'+b.items.map(item=>`<li>${formatItem(item,b)}</li>`).join('')+'</ul>':''}</div></section>`;
+    return `<section${rental||hours?` class="${rental?'rental-block':'hours-block'}"`:''}><h2>${T(b.heading)}</h2><div>${T(b.text)?formatText(T(b.text)):''}${b.items.length?'<ul>'+b.items.map(item=>`<li>${formatItem(item,b)}</li>`).join('')+'</ul>':''}</div></section>`;
   }).join('');
   const gallery=document.getElementById('detail-gallery');
-  if(entry.photos||entry.count){
+  if(entry.images||entry.photos||entry.count){
     const prefix=entry.image.slice(0,entry.image.lastIndexOf('/')+1);
     const selected=Number(entry.image.match(/(\d+)\.jpg$/)?.[1]);
-    const photos=entry.photos||[selected,...Array.from({length:entry.count},(_,i)=>i+1).filter(n=>n!==selected)];
+    const photos=entry.images||entry.photos||[selected,...Array.from({length:entry.count},(_,i)=>i+1).filter(n=>n!==selected)];
     gallery.classList.add(`count-${photos.length}`);
     document.getElementById('detail-gallery-wrap').classList.add(`gallery-${photos.length}`);
-    gallery.innerHTML=photos.map((n,i)=>`<img loading="lazy" src="${prefix}${String(n).padStart(2,'0')}.jpg" alt="${T(entry.title)}, ${say('фотография','photo')} ${i+1}">`).join('');
+    gallery.innerHTML=photos.map((n,i)=>`<img loading="lazy" src="${typeof n==='string'?n:`${prefix}${String(n).padStart(2,'0')}.jpg`}" alt="${T(entry.title)}, ${say('фотография','photo')} ${i+1}">`).join('');
   }else document.getElementById('detail-gallery-wrap').hidden=true;
   set('gallery-label',say('Галерея','Gallery'));
   set('gallery-hint',say('Листайте фото →','Swipe photos →'));
