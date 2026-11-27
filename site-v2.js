@@ -85,18 +85,20 @@
   set('#tl-search-form a','Подобрать номер →','Find a room →');
 
   set('#rooms-new h2','Номера','Rooms');
-  set('#rooms-new .new-heading p','Пространства для отдыха и работы в центре Иванова. Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo. Explore the categories and photos.');
-  set('.carousel-hint','← Свайпайте номера →','← Swipe through rooms →');
-  set('.offers-hint','← Свайпайте предложения →','← Swipe through offers →');
+  const roomDescription=document.querySelector('#rooms-new .new-heading p');
+  if(roomDescription)roomDescription.innerHTML=localized('Пространство для отдыха и работы в центре Иванова.<br>Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo.<br>Explore the categories and photos.');
+  set('.carousel-hint','Листайте','Swipe');
+  set('.offers-hint','Листайте','Swipe');
   document.querySelectorAll('.carousel-arrow[data-dir="-1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Назад','Previous'));
   document.querySelectorAll('.carousel-arrow[data-dir="1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Далее','Next'));
   document.querySelectorAll('[data-slide="offers"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующее предложение':'Предыдущее предложение',button.dataset.dir==='1'?'Next offer':'Previous offer')));
   document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
-  set('#restaurant .mobile-scroll-hint','← Листайте карточки →','← Swipe through the cards →');
-  set('#conference .mobile-scroll-hint','← Листайте залы →','← Swipe through the halls →');
+  set('#restaurant .mobile-scroll-hint','Листайте','Swipe');
+  set('#conference .mobile-scroll-hint','Листайте','Swipe');
   set('#restaurant .new-eyebrow','Банкеты и торжества','Banquets & Celebrations');
   set('#restaurant h2','Рестораны','Restaurants');
-  set('#restaurant .new-heading p','Завтраки, встречи и события в самом центре Иванова. Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo. Find a space for your occasion.');
+  const restaurantDescription=document.querySelector('#restaurant .new-heading p');
+  if(restaurantDescription)restaurantDescription.innerHTML=localized('Завтраки, встречи и события в самом центре Иванова.<br>Выберите ресторан или зал под ваш формат.','Breakfast, meetings and celebrations in the heart of Ivanovo.<br>Find a space for your occasion.');
   set('#conference .new-eyebrow','Деловые события','Business Events');
   set('#conference h2','Конференц-залы','Conference Halls');
   set('#conference .new-heading p','Два пространства для встреч, презентаций и мероприятий: большой зал до 120 гостей и малый зал до 50 гостей.','Two spaces for meetings and events: the large hall seats up to 120 guests and the small hall up to 50.');
