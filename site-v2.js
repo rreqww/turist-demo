@@ -87,14 +87,14 @@
   set('#rooms-new h2','Номера','Rooms');
   const roomDescription=document.querySelector('#rooms-new .new-heading p');
   if(roomDescription)roomDescription.innerHTML=localized('Пространство для отдыха и работы в центре Иванова.<br>Выберите категорию и посмотрите фотографии.','Room to rest and work in central Ivanovo.<br>Explore the categories and photos.');
-  set('.carousel-hint','Листайте','Swipe');
-  set('.offers-hint','Листайте','Swipe');
+  set('.carousel-hint','← Листайте →','← Swipe →');
+  set('.offers-hint','← Листайте →','← Swipe →');
   document.querySelectorAll('.carousel-arrow[data-dir="-1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Назад','Previous'));
   document.querySelectorAll('.carousel-arrow[data-dir="1"] .carousel-arrow-text').forEach(node=>node.textContent=localized('Далее','Next'));
   document.querySelectorAll('[data-slide="offers"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующее предложение':'Предыдущее предложение',button.dataset.dir==='1'?'Next offer':'Previous offer')));
   document.querySelectorAll('[data-slide="rooms"]').forEach(button=>button.setAttribute('aria-label',localized(button.dataset.dir==='1'?'Следующий номер':'Предыдущий номер',button.dataset.dir==='1'?'Next room':'Previous room')));
-  set('#restaurant .mobile-scroll-hint','Листайте','Swipe');
-  set('#conference .mobile-scroll-hint','Листайте','Swipe');
+  set('#restaurant .mobile-scroll-hint','← Листайте →','← Swipe →');
+  set('#conference .mobile-scroll-hint','← Листайте →','← Swipe →');
   set('#restaurant .new-eyebrow','Банкеты и торжества','Banquets & Celebrations');
   set('#restaurant h2','Рестораны','Restaurants');
   const restaurantDescription=document.querySelector('#restaurant .new-heading p');
